@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Accueil invité — QR code</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#0E1726}a:hover{color:#2D5BD7}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726; display: flex; flex-direction: column">
+
+  <div style="position: relative; background: #0E1726; color: #FFFFFF; padding: 50px 22px 82px; overflow: hidden">
+    <svg style="position: absolute; right: -250px; top: 100px" width="430" height="330" viewBox="0 0 430 330" aria-hidden="true">
+      <g fill="none" stroke="#FFFFFF" stroke-opacity="0.09" stroke-width="1.5">
+        <path d="M70 330 V170 A145 145 0 0 1 360 170 V330" />
+        <path d="M55 330 V170 A160 160 0 0 1 375 170 V330" />
+        <path d="M40 330 V170 A175 175 0 0 1 390 170 V330" />
+        <path d="M25 330 V170 A190 190 0 0 1 405 170 V330" />
+        <path d="M10 330 V170 A205 205 0 0 1 420 170 V330" />
+      </g>
+      <path d="M47.5 330 V170 A167.5 167.5 0 0 1 382.5 170 V330" fill="none" stroke="#CFF04A" stroke-width="3" stroke-linecap="round" />
+    </svg>
+
+    <div style="position: relative; display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="width: 38px; height: 38px; border-radius: 11px; background: #CFF04A; color: #0E1726; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 24px">B</div>
+        <div style="display: flex; flex-direction: column; line-height: 1">
+          <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: 2px">BEAULIEU</span>
+          <span style="font-size: 10.5px; font-weight: 700; letter-spacing: 1.4px; color: #CFF04A; margin-top: 4px">BDS · LYCÉE LYAUTEY</span>
+        </div>
+      </div>
+      <button type="button" aria-label="Changer de langue" style="height: 44px; min-width: 52px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.28); background: transparent; color: #FFFFFF; font-size: 13px; font-weight: 700; letter-spacing: 1px">FR</button>
+    </div>
+
+    <div style="position: relative; margin-top: 30px; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 1.6px; color: #CFF04A">TOURNOI INTER-LYCÉES · SAM. 21 NOV.</span>
+      <h1 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 50px; line-height: 0.92; letter-spacing: -0.3px">Bienvenue<br />à Beaulieu</h1>
+      <p style="margin: 2px 0 0; font-size: 15px; line-height: 1.45; color: rgba(255,255,255,0.8); max-width: 232px">Indique ton nom : on te dit quel vestiaire est le tien et comment y aller.</p>
+    </div>
+  </div>
+
+  <div style="position: relative; margin: -48px 16px 0; background: #FFFFFF; border-radius: 24px; padding: 18px; box-shadow: 0 1px 2px rgba(14,23,38,0.06), 0 14px 34px rgba(14,23,38,0.12); display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="g1-nom" style="font-size: 13px; font-weight: 600; color: #4A5566">Nom et prénom</label>
+      <input id="g1-nom" type="text" value="Yasmine Benali" autocomplete="name" style="height: 52px; border-radius: 14px; border: 1.5px solid #CBD2DD; padding: 0 14px; font-size: 17px; font-weight: 500; background: #FBFBF9" />
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="g1-eta" style="font-size: 13px; font-weight: 600; color: #4A5566">Établissement</label>
+      <select id="g1-eta" style="height: 52px; border-radius: 14px; border: 1.5px solid #CBD2DD; padding: 0 12px; font-size: 16px; font-weight: 500; background: #FBFBF9">
+        <option>Lycée Descartes — Rabat</option>
+        <option>Lycée Lyautey — Casablanca</option>
+        <option>Lycée Louis-Massignon — Casablanca</option>
+        <option>Lycée Paul Valéry — Meknès</option>
+        <option>Lycée Regnault — Tanger</option>
+        <option>Lycée Victor Hugo — Marrakech</option>
+      </select>
+    </div>
+    <a href="Parcours.dc.html" style="height: 56px; border-radius: 16px; background: #CFF04A; color: #0E1726; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 700; font-size: 17px">
+      Trouver mon vestiaire
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
+    </a>
+    <div style="display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 1.45; color: #4A5566">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+      <span>Ton nom sert seulement à retrouver ta délégation. Aucune liste de participants n'est affichée.</span>
+    </div>
+  </div>
+
+  <div style="margin: 16px 16px 0; display: flex; flex-direction: column; gap: 10px">
+    <a href="Carte.dc.html" style="min-height: 58px; display: flex; align-items: center; gap: 14px; padding: 0 14px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E1E4EA; text-decoration: none; color: #0E1726">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #EEF1F6; display: flex; align-items: center; justify-content: center; flex: none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>
+      </span>
+      <span style="display: flex; flex-direction: column; flex: 1; gap: 2px">
+        <span style="font-weight: 600; font-size: 15px">Spectateur·rice ou parent</span>
+        <span style="font-size: 13px; color: #4A5566">Carte du site et programme en direct</span>
+      </span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A5566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+    </a>
+    <a href="Equipe-Connexion.dc.html" style="min-height: 58px; display: flex; align-items: center; gap: 14px; padding: 0 14px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E1E4EA; text-decoration: none; color: #0E1726">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #EEF1F6; display: flex; align-items: center; justify-content: center; flex: none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /><path d="M18 14a6 6 0 0 1 3.5 6" /></svg>
+      </span>
+      <span style="display: flex; flex-direction: column; flex: 1; gap: 2px">
+        <span style="font-weight: 600; font-size: 15px">Jeune Organisateur du BDS</span>
+        <span style="font-size: 13px; color: #4A5566">Espace des guildes</span>
+      </span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A5566" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+    </a>
+  </div>
+
+  <div style="margin-top: auto; padding: 0 22px 26px; font-size: 12.5px; line-height: 1.4; color: #4A5566; display: flex; gap: 8px; align-items: center">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9" /><path d="M12 11v6" /><path d="M12 7.5v.01" /></svg>
+    <span>Besoin d'aide ? Accueil au parvis nord, entrée rue de l'Alma.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

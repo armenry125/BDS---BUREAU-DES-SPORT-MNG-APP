@@ -1,0 +1,48 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-11-05T00:46:00Z"},
+  "title": "Beaulieu — maquette de l'app BDS",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Plan.dc.html": {"x": 0, "y": 300, "w": 1900, "h": 895, "title": "Plan du site Beaulieu (vectoriel)"},
+    "Main.dc.html": {"x": 0, "y": 1615, "w": 390, "h": 844, "title": "Invité · 1 — Accueil QR code", "is_interactive": true, "radius": 36},
+    "Parcours.dc.html": {"x": 470, "y": 1615, "w": 390, "h": 844, "title": "Invité · 2 — Mon parcours", "is_interactive": true, "radius": 36},
+    "Carte.dc.html": {"x": 940, "y": 1615, "w": 390, "h": 844, "title": "Invité · 3 — Carte interactive", "is_interactive": true, "radius": 36},
+    "Live.dc.html": {"x": 1410, "y": 1615, "w": 390, "h": 844, "title": "Invité · 4 — Live & programme", "is_interactive": true, "radius": 36},
+    "Annonces.dc.html": {"x": 1880, "y": 1615, "w": 390, "h": 844, "title": "Invité · 5 — Annonces", "is_interactive": true, "radius": 36},
+    "Equipe-Connexion.dc.html": {"x": 0, "y": 2879, "w": 390, "h": 844, "title": "Guildes — Connexion JO", "is_interactive": true, "radius": 36},
+    "Equipe-Logistique.dc.html": {"x": 470, "y": 2879, "w": 390, "h": 844, "title": "Guilde Logistique", "is_interactive": true, "radius": 36},
+    "Equipe-Arbitres.dc.html": {"x": 940, "y": 2879, "w": 390, "h": 844, "title": "Guilde Arbitres — feuille de match", "is_interactive": true, "radius": 36},
+    "Equipe-Com.dc.html": {"x": 1410, "y": 2879, "w": 390, "h": 844, "title": "Guilde Com", "is_interactive": true, "radius": 36},
+    "Equipe-Ambassadeurs.dc.html": {"x": 1880, "y": 2879, "w": 390, "h": 844, "title": "Guilde Ambassadeurs", "is_interactive": true, "radius": 36},
+    "Admin-Tableau.dc.html": {"x": 0, "y": 4143, "w": 1440, "h": 1790, "title": "Admin — tableau de bord", "expand": "fill", "is_interactive": true},
+    "Admin-Programme.dc.html": {"x": 1520, "y": 4143, "w": 1440, "h": 1560, "title": "Admin — programme & qualifications", "expand": "fill", "is_interactive": true},
+    "Admin-Delegations.dc.html": {"x": 0, "y": 6053, "w": 1440, "h": 1150, "title": "Admin — délégations & vestiaires", "expand": "fill", "is_interactive": true},
+    "Admin-Carte.dc.html": {"x": 1520, "y": 6053, "w": 1440, "h": 1300, "title": "Admin — carte & points", "expand": "fill", "is_interactive": true}
+  },
+  "order": [
+    "Main.dc.html",
+    "Plan.dc.html",
+    "Parcours.dc.html",
+    "Carte.dc.html",
+    "Live.dc.html",
+    "Annonces.dc.html",
+    "Equipe-Connexion.dc.html",
+    "Equipe-Logistique.dc.html",
+    "Equipe-Arbitres.dc.html",
+    "Equipe-Com.dc.html",
+    "Equipe-Ambassadeurs.dc.html",
+    "Admin-Tableau.dc.html",
+    "Admin-Programme.dc.html",
+    "Admin-Delegations.dc.html",
+    "Admin-Carte.dc.html"
+  ],
+  "notes": {
+    "t-plan": {"x": 0, "y": 0, "text": "Plan du site — base de la carte interactive", "kind": "title1", "maxW": 1900},
+    "t-invites": {"x": 0, "y": 1315, "text": "Invités — du QR code au bon terrain", "kind": "title1", "maxW": 2270},
+    "t-guildes": {"x": 0, "y": 2579, "text": "Guildes — l'espace des Jeunes Organisateurs", "kind": "title1", "maxW": 2270},
+    "t-admin": {"x": 0, "y": 3843, "text": "Admins — pilotage sur ordinateur", "kind": "title1", "maxW": 2960}
+  },
+  "designSystems": []
+}

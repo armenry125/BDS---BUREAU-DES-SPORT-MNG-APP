@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — tableau de bord de l'événement</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#2D5BD7}a:hover{color:#1F46B0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(201,42,58,.6)}70%{box-shadow:0 0 0 7px rgba(201,42,58,0)}100%{box-shadow:0 0 0 0 rgba(201,42,58,0)}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+
+  <aside style="flex: 1 1 236px; background: #0E1726; color: #FFFFFF; padding: 22px 14px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 11px; background: #CFF04A; color: #0E1726; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 23px">B</div>
+      <div style="display: flex; flex-direction: column; line-height: 1.1">
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: 1.6px">BEAULIEU</span>
+        <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: #CFF04A">ADMIN · BDS</span>
+      </div>
+    </div>
+    <div style="border-radius: 12px; background: rgba(255,255,255,0.06); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 600">Événement</span>
+      <span style="font-size: 13.5px; font-weight: 700">Tournoi inter-lycées</span>
+      <span style="font-size: 12px; color: rgba(255,255,255,0.7)">Sam. 21 nov. · Beaulieu</span>
+    </div>
+    <nav aria-label="Administration" style="display: flex; flex-direction: column; gap: 4px">
+      <a href="Admin-Tableau.dc.html" aria-current="page" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; background: #CFF04A; color: #0E1726; font-size: 13.5px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4z" /><path d="M13 4h7v4h-7z" /><path d="M13 10h7v10h-7z" /><path d="M4 13h7v7H4z" /></svg>Vue d'ensemble</a>
+      <a href="Admin-Carte.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>Carte &amp; points</a>
+      <a href="Admin-Programme.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18" /><path d="M8 3v4" /><path d="M16 3v4" /></svg>Programme &amp; qualifs</a>
+      <a href="Admin-Delegations.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /><path d="M18 14a6 6 0 0 1 3.5 6" /></svg>Délégations &amp; vestiaires</a>
+      <a href="#annonce" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg>Annonces</a>
+      <a href="Equipe-Ambassadeurs.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.9L12 16.4l-5.2 2.8 1-5.9L3.5 9.2l5.9-.9z" /></svg>Guildes &amp; JO</a>
+    </nav>
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid rgba(255,255,255,0.12); padding: 14px 6px 0">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: rgba(255,255,255,0.6)">ADMINS</span>
+      <div style="display: flex; align-items: center; gap: 10px"><span style="width: 30px; height: 30px; border-radius: 50%; background: #CFF04A; color: #0E1726; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center">AR</span><span style="font-size: 13px; font-weight: 600">Armand</span></div>
+      <div style="display: flex; align-items: center; gap: 10px"><span style="width: 30px; height: 30px; border-radius: 50%; background: #9AD7F5; color: #0E1726; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">FB</span><span style="font-size: 13px; font-weight: 600">[Fondateur·rice du BDS]</span></div>
+    </div>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px">
+        <h1 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1">Vue d'ensemble</h1>
+        <span style="font-size: 13.5px; color: #4A5566">Tournoi inter-lycées · samedi 21 novembre</span>
+      </div>
+      <span style="height: 36px; padding: 0 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E1E4EA; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700"><span style="width: 8px; height: 8px; border-radius: 50%; background: #C92A3A; animation: livepulse 1.6s ease-out infinite"></span>En direct · 11:42</span>
+      <a href="#annonce" style="height: 44px; padding: 0 16px; border-radius: 12px; background: #0E1726; color: #FFFFFF; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#CFF04A" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14" /><path d="M5 12h14" /></svg>Nouvelle annonce</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 14px">
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12.5px; font-weight: 600; color: #4A5566">Délégations arrivées</span>
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1">6<span style="font-size: 22px; color: #4A5566"> / 6</span></span>
+        <span style="font-size: 12.5px; color: #1A6340; font-weight: 600">Toutes arrivées depuis 09:31</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12.5px; font-weight: 600; color: #4A5566">Matchs en cours</span>
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1">6</span>
+        <span style="font-size: 12.5px; color: #4A5566">3 terrains libres · 1 match décalé</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12.5px; font-weight: 600; color: #4A5566">JO sur le terrain</span>
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1">34<span style="font-size: 22px; color: #4A5566"> / 38</span></span>
+        <span style="font-size: 12.5px; color: #8A3A06; font-weight: 600">2 zones en sous-effectif</span>
+      </div>
+      <div style="background: #0E1726; color: #FFFFFF; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,0.72)">Prochaine remise de prix</span>
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1; color: #F2C94C">12:30</span>
+        <span style="font-size: 12.5px; color: rgba(255,255,255,0.78)">Médailles athlétisme · podium</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <section style="flex: 2 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; flex: 1 1 auto">Carte en direct</h2>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #4A5566"><span style="width: 10px; height: 10px; border-radius: 50%; background: #C92A3A"></span>En direct</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #4A5566"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF; border: 2px solid #0E1726"></span>À venir</span>
+          <span style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #4A5566"><span style="width: 10px; height: 10px; border-radius: 50%; background: #B9C0CB"></span>Libre</span>
+          <a href="Admin-Carte.dc.html" style="font-size: 13px; font-weight: 700; text-decoration: none">Éditer les points</a>
+        </div>
+        <div style="position: relative; width: 100%; aspect-ratio: 1845 / 842; border-radius: 14px; overflow: hidden; background: #F5F4EF">
+          <img src="/_blob/a1da3f64212a3faa341d6b7b32c8f763" alt="Plan de Beaulieu avec l'état des terrains" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%" />
+          <sc-for list="{{marks}}" as="m" hint-placeholder-count="0">
+            <span title="{{m.title}}" style="position: absolute; left: {{m.left}}%; top: {{m.top}}%; transform: translate(-50%, -50%); height: 20px; min-width: 22px; padding: 0 4px; border-radius: 6px; background: {{m.bg}}; color: {{m.fg}}; border: 1.5px solid {{m.bd}}; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(14,23,38,0.25)">{{m.code}}<sc-if value="{{m.live}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: -4px; right: -4px; width: 9px; height: 9px; border-radius: 50%; background: #C92A3A; border: 1.5px solid #FFFFFF; animation: livepulse 1.6s ease-out infinite"></span></sc-if></span>
+          </sc-for>
+        </div>
+      </section>
+
+      <section id="annonce" style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Annonce rapide</h2>
+        <div role="radiogroup" aria-label="Type d'annonce" style="display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{types}}" as="t" hint-placeholder-count="5">
+            <button type="button" role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}" style="height: 34px; padding: 0 11px; border-radius: 999px; border: 1px solid {{t.bd}}; background: {{t.bg}}; color: {{t.fg}}; font-size: 12.5px; font-weight: 700; cursor: pointer">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <label for="adm-cible" style="font-size: 12.5px; font-weight: 600; color: #4A5566">Destinataires</label>
+          <select id="adm-cible" style="height: 42px; border-radius: 11px; border: 1.5px solid #CBD2DD; padding: 0 10px; font-size: 14px; background: #FBFBF9">
+            <option>Tout le monde</option>
+            <option>Une délégation</option>
+            <option>Une guilde</option>
+            <option>Une zone du site</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <label for="adm-msg" style="font-size: 12.5px; font-weight: 600; color: #4A5566">Message</label>
+          <textarea id="adm-msg" rows="3" value="{{draft}}" onChange="{{onDraft}}" style="border-radius: 11px; border: 1.5px solid #CBD2DD; padding: 9px 11px; font-size: 14px; line-height: 1.4; resize: vertical; background: #FBFBF9"></textarea>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+          <div role="radiogroup" aria-label="Quand" style="display: flex; gap: 4px; padding: 3px; border-radius: 11px; background: #EEF0F3">
+            <button type="button" role="radio" aria-checked="{{nowOn}}" onClick="{{setNow}}" style="height: 36px; padding: 0 12px; border-radius: 9px; border: 0; background: {{nowBg}}; font-size: 13px; font-weight: 700; cursor: pointer">Maintenant</button>
+            <button type="button" role="radio" aria-checked="{{laterOn}}" onClick="{{setLater}}" style="height: 36px; padding: 0 12px; border-radius: 9px; border: 0; background: {{laterBg}}; font-size: 13px; font-weight: 700; cursor: pointer">Programmer</button>
+          </div>
+          <sc-if value="{{later}}" hint-placeholder-val="{{ false }}">
+            <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600">à <input type="time" value="12:20" style="height: 36px; border-radius: 9px; border: 1.5px solid #CBD2DD; padding: 0 8px; font-size: 13.5px" /></label>
+          </sc-if>
+        </div>
+        <div style="border-radius: 16px; background: #EEF0F3; padding: 10px">
+          <div style="border-radius: 13px; background: rgba(255,255,255,0.92); box-shadow: 0 2px 8px rgba(14,23,38,0.1); padding: 10px 12px; display: flex; gap: 10px">
+            <span style="width: 34px; height: 34px; border-radius: 9px; background: #0E1726; color: #CFF04A; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 20px; flex: none">B</span>
+            <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+              <span style="font-size: 11.5px; color: #4A5566">Beaulieu · {{whenLabel}}</span>
+              <span style="font-size: 13.5px; font-weight: 700">{{previewTitle}}</span>
+              <span style="font-size: 12.5px; color: #2B3545; line-height: 1.35">{{draft}}</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" onClick="{{publish}}" style="height: 48px; border-radius: 13px; border: 0; background: {{pubBg}}; color: #0E1726; font-size: 15px; font-weight: 800; cursor: pointer">{{pubLabel}}</button>
+      </section>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; flex: 1 1 auto">Terrains</h2>
+        <a href="Admin-Programme.dc.html" style="font-size: 13px; font-weight: 700; text-decoration: none">Programme complet</a>
+      </div>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 860px; border-collapse: collapse; font-size: 13.5px">
+          <thead>
+            <tr style="text-align: left; color: #4A5566; font-size: 12px">
+              <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Terrain</th>
+              <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Match</th>
+              <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Score</th>
+              <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Arbitrage</th>
+              <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">JO</th>
+              <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+              <tr>
+                <td style="padding: 9px 10px; border-bottom: 1px solid #EEF0F3; white-space: nowrap"><span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 6px; background: {{r.color}}; color: #FFFFFF; font-size: 11.5px; font-weight: 800">{{r.court}}</span></td>
+                <td style="padding: 9px 10px; border-bottom: 1px solid #EEF0F3"><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 600">{{r.match}}</span><span style="font-size: 12px; color: #4A5566">{{r.comp}}</span></span></td>
+                <td style="padding: 9px 10px; border-bottom: 1px solid #EEF0F3; white-space: nowrap; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px">{{r.score}}</td>
+                <td style="padding: 9px 10px; border-bottom: 1px solid #EEF0F3; color: {{r.arbColor}}; font-weight: {{r.arbWeight}}">{{r.arb}}</td>
+                <td style="padding: 9px 10px; border-bottom: 1px solid #EEF0F3">{{r.jo}}</td>
+                <td style="padding: 9px 10px; border-bottom: 1px solid #EEF0F3; white-space: nowrap"><span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 9px; border-radius: 8px; background: {{r.stBg}}; color: {{r.stFg}}; font-size: 11.5px; font-weight: 800">{{r.st}}</span></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <section style="flex: 1 1 380px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Alertes</h2>
+        <sc-for list="{{alerts}}" as="al" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: {{al.bg}}">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: {{al.dot}}; flex: none"></span>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+              <span style="font-size: 13.5px; font-weight: 700">{{al.title}}</span>
+              <span style="font-size: 12.5px; color: #4A5566">{{al.sub}}</span>
+            </div>
+            <sc-if value="{{al.open}}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{al.act}}" style="height: 38px; padding: 0 12px; border-radius: 10px; border: 0; background: #0E1726; color: #FFFFFF; font-size: 12.5px; font-weight: 700; white-space: nowrap; cursor: pointer">{{al.cta}}</button>
+            </sc-if>
+            <sc-if value="{{al.done}}" hint-placeholder-val="{{ false }}">
+              <span style="font-size: 12.5px; font-weight: 700; color: #1A6340; white-space: nowrap">Traité</span>
+            </sc-if>
+          </div>
+        </sc-for>
+      </section>
+      <section style="flex: 1 1 380px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <h2 style="margin: 0 0 4px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Fil d'activité</h2>
+        <sc-for list="{{feed}}" as="f" hint-placeholder-count="6">
+          <div style="display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid #EEF0F3; font-size: 13px">
+            <span style="width: 42px; flex: none; font-weight: 700; color: #4A5566">{{f.t}}</span>
+            <span style="flex: 1; min-width: 0"><strong>{{f.what}}</strong> {{f.detail}}</span>
+          </div>
+        </sc-for>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1790}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { type: 'info', later: false, published: false, done: {}, custom: {} };
+  }
+  renderVals() {
+    const s = this.state;
+    const COL = { basket: '#B84F0A', hand: '#2D5BD7', volley: '#7B45C9', foot: '#1E7F4C', athle: '#B4316B' };
+    const pct = (x, y) => ({ left: ((x - 50) / 1845 * 100).toFixed(2), top: ((y - 66) / 842 * 100).toFixed(2) });
+    const M = [
+      ['B1', 744.5, 523.7, 'basket', 'free'], ['B2', 814.9, 510.5, 'basket', 'live'], ['B3', 765.9, 649.8, 'basket', 'live'], ['B4', 822.4, 639.2, 'basket', 'free'],
+      ['H1', 901.3, 503.5, 'hand', 'live'], ['H2', 1000.0, 485.0, 'hand', 'next'], ['V1', 889.4, 646.7, 'volley', 'next'], ['V2', 943.5, 636.6, 'volley', 'live'],
+      ['V3', 994.3, 627.1, 'volley', 'free'], ['V4', 1050.2, 616.7, 'volley', 'free'], ['Foot', 963.0, 248.8, 'foot', 'live'], ['L', 1101.7, 525.0, 'athle', 'live'],
+      ['100', 594.3, 445.0, 'athle', 'next'], ['B5', 506.0, 701.8, 'basket', 'free'], ['B6', 571.9, 689.5, 'basket', 'free'], ['H3', 264.1, 637.5, 'hand', 'free'], ['H4', 371.2, 617.5, 'hand', 'free'],
+      ['B7', 1373.9, 403.3, 'basket', 'free'], ['B8', 1396.8, 525.2, 'basket', 'free']
+    ];
+    const marks = M.map(([code, x, y, d, st]) => Object.assign(pct(x, y), {
+      code, live: st === 'live', title: code + (st === 'live' ? ' · en direct' : st === 'next' ? ' · à venir' : ' · libre'),
+      bg: st === 'live' ? COL[d] : st === 'next' ? '#FFFFFF' : '#B9C0CB', fg: st === 'next' ? '#0E1726' : '#FFFFFF', bd: st === 'next' ? COL[d] : '#FFFFFF'
+    })).concat([
+      ['A', 218.7, 351.5], ['B', 385.8, 320.2], ['C', 242.6, 479.3], ['D', 409.7, 448.0], ['E', 1558.8, 390.6], ['F·v', 1566.7, 460.4]
+    ].map(([code, x, y]) => Object.assign(pct(x, y), { code: code.replace('·v', ''), live: false, title: 'Vestiaire ' + code.replace('·v', ''), bg: '#0E1726', fg: '#CFF04A', bd: '#FFFFFF' })));
+
+    const T = [['info', 'Info'], ['prix', 'Remise de prix'], ['depart', 'Départ'], ['qualif', 'Qualification'], ['urgent', 'Urgent']];
+    const DRAFT = {
+      info: 'Photo officielle de toutes les délégations à 13:30, devant le gymnase.',
+      prix: 'Médailles athlétisme à 12:30 au podium. Médaillés : présentez-vous à 12:20.',
+      depart: '100 m filles : finale à 12:15. Appel à 12:00 en chambre d’appel.',
+      qualif: 'Lycée Descartes qualifié : demi-finale 2 à 14:00, Basket 2.',
+      urgent: 'Merci de dégager l’allée sud pour le passage des secours.'
+    };
+    const TITLE = { info: 'Info', prix: 'Remise de prix', depart: 'Départ de course', qualif: 'Qualification', urgent: 'Urgent' };
+    const types = T.map(([id, label]) => {
+      const on = s.type === id, urgent = id === 'urgent';
+      return { label, on: on ? 'true' : 'false', bg: on ? (urgent ? '#C92A3A' : '#0E1726') : '#FFFFFF', fg: on ? '#FFFFFF' : (urgent ? '#9E1C2A' : '#0E1726'), bd: on ? (urgent ? '#C92A3A' : '#0E1726') : '#E1E4EA',
+        pick: () => this.setState({ type: id, published: false }) };
+    });
+
+    const R = [
+      ['BASKET 1', 'basket', '—', 'Libre jusqu’à 14:00', '', 'Désigné à 13:30', 'Youssef A.', 'free'],
+      ['BASKET 2', 'basket', 'Lyautey – Victor Hugo', 'Basket filles U17 · Poule A', '18–14 · Q3', 'Mehdi T., Inès A.', 'Lina C., Omar K.', 'live'],
+      ['BASKET 3', 'basket', 'Massignon – Regnault', 'Basket filles U17 · Poule B', '22–25 · Q4', 'Hamza I., Sofia B.', 'Maya S.', 'live'],
+      ['BASKET 4', 'basket', '—', 'Libre jusqu’à 14:50', '', '—', 'Salma B.', 'free'],
+      ['HAND 1', 'hand', 'Paul Valéry – Massignon', 'Hand garçons U17', "9–11 · 2e MT", 'Ilyas B., Kenza L.', 'Rayan B.', 'live'],
+      ['HAND 2', 'hand', 'Descartes – Victor Hugo', 'Hand garçons U17 · 12:00', '', 'À confirmer', 'Salma B.', 'late'],
+      ['VOLLEY 1', 'volley', 'Massignon – Regnault', 'Volley mixte · 12:10', '', 'Rania F.', 'Yanis C.', 'next'],
+      ['VOLLEY 2', 'volley', 'Descartes – Lyautey', 'Volley mixte', '1–0 · 18–15', 'Anas T.', 'Yanis C.', 'live'],
+      ['FOOT', 'foot', 'Lyautey – Regnault', 'Foot garçons', "1–1 · 32'", 'Ali O.', 'Omar K.', 'live'],
+      ['LANCERS', 'athle', 'Poids garçons', '3e essai', '', 'Rania F.', 'Youssef A.', 'live']
+    ];
+    const ST = { live: ['EN DIRECT', '#FCE9EA', '#9E1C2A'], next: ['À VENIR', '#EEF1F6', '#0E1726'], free: ['LIBRE', '#E6F4EC', '#1A6340'], late: ['DÉCALÉ', '#FDEBDD', '#8A3A06'] };
+    const rows = R.map(([court, d, match, comp, score, arb, jo, st]) => ({
+      court, color: COL[d], match, comp, score: score || '—', arb, jo, st: ST[st][0], stBg: ST[st][1], stFg: ST[st][2],
+      arbColor: arb === 'À confirmer' ? '#8A3A06' : '#0E1726', arbWeight: arb === 'À confirmer' ? 700 : 500
+    }));
+
+    const A = [
+      { id: 'arb', title: 'Hand 2 · 12:00 : arbitre non confirmé', sub: 'Ali Ouazzani libre après le foot', cta: 'Assigner' },
+      { id: 'jo', title: 'Plateau ouest : 2 JO manquants', sub: '6 présents sur 8', cta: 'Prévenir la Logistique' },
+      { id: 'com', title: 'Annonce de la Com à valider', sub: 'Photo officielle à 13:30', cta: 'Publier' }
+    ];
+    const alerts = A.map((a) => {
+      const d = !!s.done[a.id];
+      return Object.assign({}, a, { open: !d, done: d, bg: d ? '#F3F7F4' : '#FFF6EF', dot: d ? '#1E7F4C' : '#D9822B',
+        act: () => { const n = Object.assign({}, this.state.done); n[a.id] = true; this.setState({ done: n }); } });
+    });
+    const feed = [
+      ['11:41', 'Score Basket 2', 'Lyautey 18–14 Victor Hugo, par Mehdi T.'],
+      ['11:38', 'JO pointé', 'Rayan Berrada affecté à Hand 1 (Logistique)'],
+      ['11:30', 'Annonce proposée', 'par la Com : photo officielle à 13:30'],
+      ['11:16', 'Qualification auto.', 'Descartes inscrit en demi-finale 2, délégation prévenue'],
+      ['11:15', 'Résultat validé', 'Basket 1 : Descartes 32–27 Victor Hugo'],
+      ['11:05', 'Annonce publiée', 'Hand 2 décalé à 12:00']
+    ].map(([t, what, detail]) => ({ t, what, detail }));
+
+    return {
+      marks, types, rows, alerts, feed,
+      draft: s.custom[s.type] != null ? s.custom[s.type] : DRAFT[s.type], previewTitle: TITLE[s.type],
+      onDraft: (e) => { const c = Object.assign({}, this.state.custom); c[this.state.type] = e && e.target ? e.target.value : ''; this.setState({ custom: c, published: false }); },
+      later: s.later, nowOn: s.later ? 'false' : 'true', laterOn: s.later ? 'true' : 'false',
+      nowBg: s.later ? 'transparent' : '#FFFFFF', laterBg: s.later ? '#FFFFFF' : 'transparent',
+      whenLabel: s.later ? 'à 12:20' : 'maintenant',
+      setNow: () => this.setState({ later: false, published: false }), setLater: () => this.setState({ later: true, published: false }),
+      publish: () => this.setState({ published: true }),
+      pubLabel: s.published ? (s.later ? 'Programmée pour 12:20' : 'Annonce publiée') : (s.later ? 'Programmer' : 'Publier maintenant'),
+      pubBg: s.published ? '#E6F4EC' : '#CFF04A'
+    };
+  }
+}
+</script>
+</body>
+</html>

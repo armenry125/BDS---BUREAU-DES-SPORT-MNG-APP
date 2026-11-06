@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — délégations, vestiaires et QR codes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#2D5BD7}a:hover{color:#1F46B0}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+
+  <aside style="flex: 1 1 236px; background: #0E1726; color: #FFFFFF; padding: 22px 14px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 11px; background: #CFF04A; color: #0E1726; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 23px">B</div>
+      <div style="display: flex; flex-direction: column; line-height: 1.1">
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: 1.6px">BEAULIEU</span>
+        <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: #CFF04A">ADMIN · BDS</span>
+      </div>
+    </div>
+    <div style="border-radius: 12px; background: rgba(255,255,255,0.06); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 600">Événement</span>
+      <span style="font-size: 13.5px; font-weight: 700">Tournoi inter-lycées</span>
+      <span style="font-size: 12px; color: rgba(255,255,255,0.7)">Sam. 21 nov. · Beaulieu</span>
+    </div>
+    <nav aria-label="Administration" style="display: flex; flex-direction: column; gap: 4px">
+      <a href="Admin-Tableau.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4z" /><path d="M13 4h7v4h-7z" /><path d="M13 10h7v10h-7z" /><path d="M4 13h7v7H4z" /></svg>Vue d'ensemble</a>
+      <a href="Admin-Carte.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>Carte &amp; points</a>
+      <a href="Admin-Programme.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18" /><path d="M8 3v4" /><path d="M16 3v4" /></svg>Programme &amp; qualifs</a>
+      <a href="Admin-Delegations.dc.html" aria-current="page" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; background: #CFF04A; color: #0E1726; font-size: 13.5px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /><path d="M18 14a6 6 0 0 1 3.5 6" /></svg>Délégations &amp; vestiaires</a>
+      <a href="Admin-Tableau.dc.html#annonce" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg>Annonces</a>
+      <a href="Equipe-Ambassadeurs.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.9L12 16.4l-5.2 2.8 1-5.9L3.5 9.2l5.9-.9z" /></svg>Guildes &amp; JO</a>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px">
+        <h1 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1">Délégations &amp; vestiaires</h1>
+        <span style="font-size: 13.5px; color: #4A5566">6 délégations · {{total}} participants · toutes arrivées</span>
+      </div>
+      <button type="button" style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1.5px solid #CBD2DD; background: #FFFFFF; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; cursor: pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4" /><path d="m7 9 5-5 5 5" /><path d="M5 20h14" /></svg>Importer une liste</button>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <section style="flex: 3 1 620px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Délégations</h2>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13.5px">
+            <thead>
+              <tr style="text-align: left; color: #4A5566; font-size: 12px">
+                <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Établissement</th>
+                <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Disciplines</th>
+                <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Effectif</th>
+                <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Vestiaire</th>
+                <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">Arrivée</th>
+                <th scope="col" style="padding: 8px 10px; font-weight: 700; border-bottom: 1px solid #E1E4EA">QR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{delegs}}" as="d" hint-placeholder-count="6">
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #EEF0F3"><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 700">{{d.name}}</span><span style="font-size: 12px; color: #4A5566">{{d.city}}</span></span></td>
+                  <td style="padding: 10px; border-bottom: 1px solid #EEF0F3"><span style="display: flex; flex-wrap: wrap; gap: 4px"><sc-if value="{{d.hasBasket}}" hint-placeholder-val="{{ true }}"><span style="height: 22px; padding: 0 7px; border-radius: 6px; background: #FBE9DD; color: #8A3A06; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center">Basket F</span></sc-if><sc-if value="{{d.hasHand}}" hint-placeholder-val="{{ true }}"><span style="height: 22px; padding: 0 7px; border-radius: 6px; background: #E7EDFD; color: #1F46B0; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center">Hand G</span></sc-if><sc-if value="{{d.hasVolley}}" hint-placeholder-val="{{ true }}"><span style="height: 22px; padding: 0 7px; border-radius: 6px; background: #F0E8FA; color: #5B2E9C; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center">Volley</span></sc-if><sc-if value="{{d.hasFoot}}" hint-placeholder-val="{{ true }}"><span style="height: 22px; padding: 0 7px; border-radius: 6px; background: #E3F2EA; color: #155E3A; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center">Foot</span></sc-if><sc-if value="{{d.hasAthle}}" hint-placeholder-val="{{ true }}"><span style="height: 22px; padding: 0 7px; border-radius: 6px; background: #FBE7F0; color: #8E1F52; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center">Athlé</span></sc-if></span></td>
+                  <td style="padding: 10px; border-bottom: 1px solid #EEF0F3; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px">{{d.count}}</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #EEF0F3">
+                    <label style="display: flex; align-items: center; gap: 8px"><span style="width: 30px; height: 30px; border-radius: 8px; background: #0E1726; color: #CFF04A; display: inline-flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 18px">{{d.vest}}</span><select aria-label="{{d.selLabel}}" value="{{d.vest}}" onChange="{{d.setVest}}" style="height: 36px; border-radius: 9px; border: 1.5px solid #CBD2DD; padding: 0 6px; font-size: 13px; background: #FBFBF9"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option></select></label>
+                  </td>
+                  <td style="padding: 10px; border-bottom: 1px solid #EEF0F3; white-space: nowrap"><span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #1A6340"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg>{{d.arrival}}</span></td>
+                  <td style="padding: 10px; border-bottom: 1px solid #EEF0F3"><button type="button" aria-label="{{d.qrLabel}}" style="height: 36px; padding: 0 10px; border-radius: 9px; border: 1.5px solid #CBD2DD; background: #FFFFFF; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v6H4z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6H4z" /><path d="M14 14h2v2h-2z" /><path d="M18 18h2v2h-2z" /></svg>QR</button></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <sc-if value="{{conflict}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #FDEBDD; color: #8A3A06; font-size: 13px; font-weight: 600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M12 4 2 20h20z" /><path d="M12 10v4" /><path d="M12 17v.01" /></svg>
+            {{conflictText}}
+          </div>
+        </sc-if>
+      </section>
+
+      <div style="flex: 2 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+        <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+          <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Vestiaires</h2>
+          <div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 10px">
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <div style="position: relative; width: 100%; aspect-ratio: 370 / 270; border-radius: 12px; overflow: hidden; background: #F5F4EF; border: 1px solid #E1E4EA">
+                <img src="/_blob/a1da3f64212a3faa341d6b7b32c8f763" alt="" aria-hidden="true" style="position: absolute; left: -13.51%; top: 0; margin-top: -55.14%; width: 498.65%; max-width: none; height: auto" />
+                <sc-for list="{{gymPins}}" as="g" hint-placeholder-count="4">
+                  <span style="position: absolute; left: {{g.left}}%; top: {{g.top}}%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 7px; background: #0E1726; color: #CFF04A; border: 2px solid #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 16px">{{g.code}}</span>
+                </sc-for>
+              </div>
+              <span style="font-size: 12px; font-weight: 600; color: #4A5566">Gymnase · A à D</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <div style="position: relative; width: 100%; aspect-ratio: 180 / 170; border-radius: 12px; overflow: hidden; background: #F5F4EF; border: 1px solid #E1E4EA">
+                <img src="/_blob/a1da3f64212a3faa341d6b7b32c8f763" alt="" aria-hidden="true" style="position: absolute; left: -794.44%; top: 0; margin-top: -152.22%; width: 1025%; max-width: none; height: auto" />
+                <sc-for list="{{estPins}}" as="g" hint-placeholder-count="2">
+                  <span style="position: absolute; left: {{g.left}}%; top: {{g.top}}%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 7px; background: #0E1726; color: #CFF04A; border: 2px solid #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 16px">{{g.code}}</span>
+                </sc-for>
+              </div>
+              <span style="font-size: 12px; font-weight: 600; color: #4A5566">Bâtiment est · E, F</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <sc-for list="{{occupancy}}" as="o" hint-placeholder-count="6">
+              <div style="display: flex; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+                <span style="width: 24px; height: 24px; border-radius: 6px; background: #0E1726; color: #CFF04A; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 15px; flex: none">{{o.code}}</span>
+                <span style="flex: 1; font-weight: 600; color: {{o.color}}">{{o.who}}</span>
+                <span style="color: #4A5566">{{o.count}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap">
+          <svg role="img" aria-label="Exemple de QR code d'accueil" width="112" height="112" viewBox="0 0 29 29" style="flex: none; border-radius: 10px; background: #FFFFFF; border: 1px solid #E1E4EA; padding: 4px" shape-rendering="crispEdges">
+            <rect x="0" y="0" width="7" height="7" fill="#0E1726" /><rect x="1" y="1" width="5" height="5" fill="#FFFFFF" /><rect x="2" y="2" width="3" height="3" fill="#0E1726" />
+            <rect x="22" y="0" width="7" height="7" fill="#0E1726" /><rect x="23" y="1" width="5" height="5" fill="#FFFFFF" /><rect x="24" y="2" width="3" height="3" fill="#0E1726" />
+            <rect x="0" y="22" width="7" height="7" fill="#0E1726" /><rect x="1" y="23" width="5" height="5" fill="#FFFFFF" /><rect x="2" y="24" width="3" height="3" fill="#0E1726" />
+            <path d="M9 1h2v2H9zM12 0h1v4h-1zM15 2h3v1h-3zM19 0h2v3h-2zM9 5h4v1H9zM15 5h1v3h-1zM18 5h2v2h-2zM8 9h3v1H8zM13 8h2v3h-2zM17 9h4v1h-4zM23 8h1v3h-1zM26 9h3v2h-3zM0 9h2v2H0zM3 10h3v1H3zM9 12h1v4H9zM11 12h3v1h-3zM16 12h2v2h-2zM20 11h2v3h-2zM24 13h4v1h-4zM1 13h2v3H1zM5 13h2v1H5zM12 15h4v1h-4zM18 15h1v4h-1zM21 16h3v2h-3zM26 15h2v3h-2zM4 17h3v1H4zM9 18h2v2H9zM13 18h3v1h-3zM0 18h2v2H0zM20 20h4v1h-4zM25 20h1v3h-1zM9 22h3v1H9zM14 21h2v3h-2zM17 23h3v1h-3zM22 24h2v2h-2zM27 23h2v1h-2zM9 25h1v4H9zM11 26h4v1h-4zM16 26h1v3h-1zM19 27h3v2h-3zM24 27h5v1h-5zM12 28h2v1h-2z" fill="#0E1726" />
+            <rect x="12" y="12" width="5" height="5" rx="1" fill="#CFF04A" stroke="#0E1726" stroke-width="0.6" />
+          </svg>
+          <div style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 8px">
+            <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">QR codes</h2>
+            <span style="font-size: 13px; line-height: 1.4; color: #2B3545">Affiche d'accueil (QR général) et un QR par délégation, qui ouvre directement son parcours.</span>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <button type="button" style="height: 40px; padding: 0 12px; border-radius: 10px; border: 0; background: #0E1726; color: #FFFFFF; font-size: 13px; font-weight: 700; cursor: pointer">Affiche A3</button>
+              <button type="button" style="height: 40px; padding: 0 12px; border-radius: 10px; border: 1.5px solid #CBD2DD; background: #FFFFFF; font-size: 13px; font-weight: 700; cursor: pointer">QR des 6 délégations</button>
+            </div>
+          </div>
+        </section>
+
+        <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+          <h2 style="margin: 0 0 2px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Recherche invitée</h2>
+          <sc-for list="{{privacy}}" as="pv" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 6px 0">
+              <span style="flex: 1; font-size: 13.5px; line-height: 1.4">{{pv.label}}</span>
+              <button type="button" role="switch" aria-checked="{{pv.checked}}" aria-label="{{pv.label}}" onClick="{{pv.toggle}}" style="width: 50px; height: 30px; border-radius: 999px; border: 0; background: {{pv.bg}}; position: relative; flex: none; cursor: pointer"><span style="position: absolute; top: 3px; left: {{pv.knob}}px; width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(14,23,38,0.3); transition: left .2s ease"></span></button>
+            </div>
+          </sc-for>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1150}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { vest: { lyautey: 'A', descartes: 'B', victorhugo: 'C', massignon: 'D', paulvalery: 'E', regnault: 'F' }, priv: { nomEta: true, liste: true, effacer: true } };
+  }
+  renderVals() {
+    const s = this.state;
+    const D = [
+      ['lyautey', 'Lycée Lyautey', 'Casablanca', ['basket', 'hand', 'volley', 'foot', 'athle'], 46, '08:52'],
+      ['descartes', 'Lycée Descartes', 'Rabat', ['basket', 'hand', 'volley'], 28, '09:04'],
+      ['victorhugo', 'Lycée Victor Hugo', 'Marrakech', ['basket', 'hand', 'volley'], 26, '09:22'],
+      ['massignon', 'Lycée Louis-Massignon', 'Casablanca', ['basket', 'hand', 'volley', 'foot'], 34, '08:58'],
+      ['paulvalery', 'Lycée Paul Valéry', 'Meknès', ['basket', 'hand', 'volley'], 24, '09:28'],
+      ['regnault', 'Lycée Regnault', 'Tanger', ['basket', 'hand', 'volley', 'foot', 'athle'], 32, '09:31']
+    ];
+    const delegs = D.map(([id, name, city, discs, count, arrival]) => ({
+      name, city, count, arrival, vest: s.vest[id],
+      selLabel: 'Vestiaire attribué à ' + name, qrLabel: 'QR code de ' + name,
+      hasBasket: discs.indexOf('basket') >= 0, hasHand: discs.indexOf('hand') >= 0, hasVolley: discs.indexOf('volley') >= 0, hasFoot: discs.indexOf('foot') >= 0, hasAthle: discs.indexOf('athle') >= 0,
+      setVest: (e) => { const v = Object.assign({}, this.state.vest); v[id] = e && e.target ? e.target.value : v[id]; this.setState({ vest: v }); }
+    }));
+    const byVest = {};
+    D.forEach(([id, name, , , count]) => { const v = s.vest[id]; (byVest[v] = byVest[v] || []).push([name.replace('Lycée ', ''), count]); });
+    const occupancy = ['A', 'B', 'C', 'D', 'E', 'F'].map((code) => {
+      const list = byVest[code] || [];
+      const tot = list.reduce((a, b) => a + b[1], 0);
+      return { code, who: list.length ? list.map((x) => x[0]).join(' + ') : 'Libre', count: list.length ? tot + ' pers.' : '—', color: list.length > 1 ? '#8A3A06' : (list.length ? '#0E1726' : '#4A5566') };
+    });
+    const shared = occupancy.filter((o) => o.color === '#8A3A06');
+    const gymPins = [['A', 32.1, 30.2], ['B', 77.2, 18.6], ['C', 38.5, 77.5], ['D', 83.7, 65.9]].map(([code, left, top]) => ({ code, left, top }));
+    const estPins = [['E', 43.8, 29.8], ['F', 48.2, 70.8]].map(([code, left, top]) => ({ code, left, top }));
+    const PV = [['nomEta', 'Exiger le nom et l’établissement pour trouver un vestiaire'], ['liste', 'Ne jamais afficher de liste de participants'], ['effacer', 'Effacer les noms 48 h après l’événement']];
+    const privacy = PV.map(([id, label]) => {
+      const on = !!s.priv[id];
+      return { label, checked: on ? 'true' : 'false', bg: on ? '#0E1726' : '#CBD2DD', knob: on ? 23 : 3,
+        toggle: () => { const p = Object.assign({}, this.state.priv); p[id] = !p[id]; this.setState({ priv: p }); } };
+    });
+    return {
+      delegs, occupancy, gymPins, estPins, privacy,
+      total: D.reduce((a, d) => a + d[4], 0),
+      conflict: shared.length > 0,
+      conflictText: shared.length ? 'Vestiaire ' + shared.map((o) => o.code).join(', ') + ' partagé par deux délégations : vérifie la capacité avant de valider.' : ''
+    };
+  }
+}
+</script>
+</body>
+</html>

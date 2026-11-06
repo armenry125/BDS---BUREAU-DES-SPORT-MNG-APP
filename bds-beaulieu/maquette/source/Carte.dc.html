@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Invité — carte interactive de Beaulieu</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#0E1726}a:hover{color:#2D5BD7}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+.no-sb{scrollbar-width:none}.no-sb::-webkit-scrollbar{display:none}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(201,42,58,.6)}70%{box-shadow:0 0 0 7px rgba(201,42,58,0)}100%{box-shadow:0 0 0 0 rgba(201,42,58,0)}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #E9EAE4; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+
+  <div onPointerDown="{{onDown}}" onPointerMove="{{onMove}}" onPointerUp="{{onUp}}" onPointerLeave="{{onUp}}" style="position: absolute; left: 0; right: 0; top: 0; bottom: 84px; overflow: hidden; touch-action: none; z-index: 0; isolation: isolate; cursor: {{cursor}}">
+    <img src="/_blob/a1da3f64212a3faa341d6b7b32c8f763" alt="Plan du complexe sportif Beaulieu" draggable="false" style="position: absolute; left: {{map.left}}px; top: {{map.top}}px; width: {{map.w}}px; height: {{map.h}}px; max-width: none; user-select: none; transition: {{tr}}" />
+    <svg aria-hidden="true" viewBox="50 66 1845 842" style="position: absolute; left: {{map.left}}px; top: {{map.top}}px; width: {{map.w}}px; height: {{map.h}}px; pointer-events: none; overflow: visible; transition: {{tr}}">
+      <polygon points="{{hl.points}}" fill="{{hl.color}}" fill-opacity="0.22" stroke="#0E1726" stroke-width="{{hl.sw}}" stroke-linejoin="round" stroke-opacity="{{hl.op}}" />
+      <polyline points="{{route.points}}" fill="none" stroke="#0E1726" stroke-width="{{route.w1}}" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="{{route.op}}" />
+      <polyline points="{{route.points}}" fill="none" stroke="#CFF04A" stroke-width="{{route.w2}}" stroke-dasharray="{{route.dash}}" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="{{route.op}}" />
+    </svg>
+
+    <sc-for list="{{zones}}" as="zn" hint-placeholder-count="0">
+      <button type="button" aria-label="{{zn.aria}}" onClick="{{zn.pick}}" style="position: absolute; left: {{zn.left}}px; top: {{zn.top}}px; transform: translate(-50%, -50%); width: 44px; height: 44px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: {{tr}}">
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #0E1726; color: #CFF04A; border: 2px solid #FFFFFF; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(14,23,38,0.3)">{{zn.n}}</span>
+      </button>
+    </sc-for>
+
+    <sc-for list="{{pins}}" as="p" hint-placeholder-count="0">
+      <button type="button" aria-label="{{p.aria}}" onClick="{{p.pick}}" style="position: absolute; left: {{p.left}}px; top: {{p.top}}px; z-index: {{p.z}}; transform: translate(-50%, -50%) scale({{p.scale}}); min-width: 44px; height: 44px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: {{tr}}">
+        <sc-if value="{{p.isPill}}" hint-placeholder-val="{{ true }}">
+          <span style="height: 27px; min-width: 32px; padding: 0 7px; border-radius: 8px; background: {{p.bg}}; color: #FFFFFF; border: 2px solid #FFFFFF; box-shadow: {{p.ring}}; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; letter-spacing: 0.2px">{{p.code}}</span>
+        </sc-if>
+        <sc-if value="{{p.isVest}}" hint-placeholder-val="{{ false }}">
+          <span style="width: 31px; height: 31px; border-radius: 8px; background: #0E1726; color: #CFF04A; border: 2px solid #FFFFFF; box-shadow: {{p.ring}}; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 19px; display: flex; align-items: center; justify-content: center">{{p.code}}</span>
+        </sc-if>
+        <sc-if value="{{p.isRound}}" hint-placeholder-val="{{ false }}">
+          <span style="width: 31px; height: 31px; border-radius: 50%; background: {{p.bg}}; color: {{p.fg}}; border: 2px solid {{p.bd}}; box-shadow: {{p.ring}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11.5px">
+            <sc-if value="{{p.iText}}" hint-placeholder-val="{{ false }}"><span>{{p.code}}</span></sc-if>
+            <sc-if value="{{p.iFlag}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4" /><path d="M6 4h11l-2.5 4L17 12H6" /></svg></sc-if>
+            <sc-if value="{{p.iFinish}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4" /><path d="M6 4h12v8H6" /><path d="M10 4v8" /><path d="M14 4v8" /><path d="M6 8h12" /></svg></sc-if>
+            <sc-if value="{{p.iJump}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19c4-10 10-12 16-12" /><path d="m15 3 4 4-4 4" /><path d="M3 21h18" /></svg></sc-if>
+            <sc-if value="{{p.iShot}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="16" r="3.5" /><path d="M11 13 19 5" /><path d="M14 5h5v5" /></svg></sc-if>
+            <sc-if value="{{p.iCall}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /></svg></sc-if>
+            <sc-if value="{{p.iTrophy}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M8 6H5a2 2 0 0 0 2.5 3.5" /><path d="M16 6h3a2 2 0 0 1-2.5 3.5" /><path d="M12 13v4" /><path d="M9 20h6" /></svg></sc-if>
+            <sc-if value="{{p.iCup}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9h12v4a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5z" /><path d="M17 10.5h1.5a2.5 2.5 0 0 1 0 5H17" /><path d="M9 4v2" /><path d="M13 4v2" /></svg></sc-if>
+            <sc-if value="{{p.iCross}}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12" /><path d="M6 12h12" /></svg></sc-if>
+          </span>
+        </sc-if>
+        <sc-if value="{{p.live}}" hint-placeholder-val="{{ false }}">
+          <span style="position: absolute; top: 4px; right: 0; width: 11px; height: 11px; border-radius: 50%; background: #C92A3A; border: 2px solid #FFFFFF; animation: livepulse 1.6s ease-out infinite"></span>
+        </sc-if>
+        <sc-if value="{{p.mine}}" hint-placeholder-val="{{ false }}">
+          <span style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); height: 18px; padding: 0 6px; border-radius: 6px; background: #CFF04A; color: #0E1726; font-size: 10px; font-weight: 800; white-space: nowrap; display: flex; align-items: center; border: 1.5px solid #0E1726">TOI</span>
+        </sc-if>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 0; z-index: 5; padding: 46px 0 0; display: flex; flex-direction: column; gap: 10px; pointer-events: none">
+    <div style="padding: 0 16px; display: flex; gap: 10px; pointer-events: auto">
+      <div style="flex: 1; height: 48px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 4px 16px rgba(14,23,38,0.12); display: flex; align-items: center; gap: 10px; padding: 0 14px">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A5566" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
+        <input type="search" aria-label="Rechercher un terrain, un vestiaire ou une équipe" placeholder="Terrain, vestiaire, équipe…" style="flex: 1; min-width: 0; border: 0; outline-offset: 6px; background: transparent; font-size: 15px; height: 44px" />
+      </div>
+      <a href="Parcours.dc.html" aria-label="Mon parcours" style="width: 48px; height: 48px; border-radius: 16px; background: #0E1726; color: #CFF04A; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(14,23,38,0.2); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 22px; text-decoration: none">B</a>
+    </div>
+    <div class="no-sb" style="display: flex; gap: 8px; overflow-x: auto; padding: 0 16px 4px; pointer-events: auto">
+      <sc-for list="{{chips}}" as="c" hint-placeholder-count="7">
+        <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="flex: none; height: 38px; padding: 0 13px; border-radius: 999px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 7px; box-shadow: 0 2px 8px rgba(14,23,38,0.08); cursor: pointer">
+          <sc-if value="{{c.hasDot}}" hint-placeholder-val="{{ true }}"><span style="width: 9px; height: 9px; border-radius: 50%; background: {{c.dot}}; box-shadow: 0 0 0 1.5px {{c.dotRing}}"></span></sc-if>{{c.label}}
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position: absolute; right: 14px; top: {{ctrlTop}}px; z-index: 5; display: flex; flex-direction: column; gap: 8px; transition: top .3s ease">
+    <div style="display: flex; flex-direction: column; border-radius: 14px; background: #FFFFFF; box-shadow: 0 4px 16px rgba(14,23,38,0.14); overflow: hidden">
+      <button type="button" aria-label="Zoomer" onClick="{{zoomIn}}" style="width: 46px; height: 46px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14" /><path d="M5 12h14" /></svg></button>
+      <span style="height: 1px; background: #E1E4EA"></span>
+      <button type="button" aria-label="Dézoomer" onClick="{{zoomOut}}" style="width: 46px; height: 46px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14" /></svg></button>
+    </div>
+    <button type="button" aria-label="Vue d'ensemble du site" onClick="{{overview}}" style="width: 46px; height: 46px; border-radius: 14px; border: 0; background: #FFFFFF; box-shadow: 0 4px 16px rgba(14,23,38,0.14); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5" /><path d="M20 9V4h-5" /><path d="M4 15v5h5" /><path d="M20 15v5h-5" /></svg></button>
+  </div>
+
+  <sc-if value="{{overviewMode}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; right: 0; bottom: 84px; z-index: 6; background: #FFFFFF; border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(14,23,38,0.14); padding: 8px 16px 14px; display: flex; flex-direction: column; gap: 10px">
+      <span aria-hidden="true" style="align-self: center; width: 40px; height: 5px; border-radius: 3px; background: #D5DAE3"></span>
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px">
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 25px; line-height: 1">Le site Beaulieu</span>
+        <span style="font-size: 12.5px; color: #4A5566">Choisis une zone</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{zoneList}}" as="z" hint-placeholder-count="7">
+          <button type="button" onClick="{{z.pick}}" style="min-height: 52px; border-radius: 14px; border: 1px solid #E1E4EA; background: #FBFBF9; padding: 6px 10px; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer">
+            <span style="width: 26px; height: 26px; border-radius: 50%; background: #0E1726; color: #CFF04A; font-size: 12.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex: none">{{z.n}}</span>
+            <span style="display: flex; flex-direction: column; gap: 1px; min-width: 0"><span style="font-size: 13.5px; font-weight: 700; line-height: 1.2">{{z.label}}</span><span style="font-size: 11.5px; color: #4A5566">{{z.count}}</span></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{hasSheet}}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; left: 0; right: 0; bottom: 84px; z-index: 6; background: #FFFFFF; border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(14,23,38,0.14); padding: 8px 16px 12px; display: flex; flex-direction: column; gap: 10px">
+      <span aria-hidden="true" style="align-self: center; width: 40px; height: 5px; border-radius: 3px; background: #D5DAE3"></span>
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span aria-hidden="true" style="min-width: 46px; height: 46px; padding: 0 9px; border-radius: 13px; background: {{info.color}}; color: {{info.fg}}; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 21px">{{info.code}}</span>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+          <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; line-height: 1">{{info.title}}</span>
+          <span style="font-size: 13px; color: #4A5566">{{info.place}}</span>
+        </div>
+        <sc-if value="{{info.hasStatus}}" hint-placeholder-val="{{ true }}">
+          <span style="height: 26px; padding: 0 9px; border-radius: 8px; background: {{info.stBg}}; color: {{info.stFg}}; font-size: 11px; font-weight: 800; letter-spacing: 0.6px; display: flex; align-items: center; gap: 6px; white-space: nowrap">
+            <sc-if value="{{info.isLive}}" hint-placeholder-val="{{ true }}"><span style="width: 8px; height: 8px; border-radius: 50%; background: #C92A3A; animation: livepulse 1.6s ease-out infinite"></span></sc-if>{{info.stLabel}}
+          </span>
+        </sc-if>
+        <button type="button" aria-label="Fermer la fiche" onClick="{{closeSheet}}" style="width: 44px; height: 44px; margin-right: -8px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A5566" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12" /><path d="M18 6 6 18" /></svg></button>
+      </div>
+
+      <sc-if value="{{info.hasScore}}" hint-placeholder-val="{{ true }}">
+        <div style="border-radius: 16px; background: #0E1726; color: #FFFFFF; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px">
+          <div style="display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 600; color: rgba(255,255,255,0.72)"><span>{{info.comp}}</span><span style="color: #CFF04A">{{info.period}}</span></div>
+          <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">{{info.a}}</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 27px; line-height: 1">{{info.sa}}</span></div>
+          <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">{{info.b}}</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 27px; line-height: 1">{{info.sb}}</span></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{info.hasDesc}}" hint-placeholder-val="{{ false }}">
+        <p style="margin: 0; font-size: 14px; line-height: 1.45; color: #2B3545">{{info.desc}}</p>
+      </sc-if>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <sc-if value="{{info.hasArb}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 10px; align-items: center; font-size: 13.5px"><span style="width: 28px; height: 28px; border-radius: 8px; background: #EEF1F6; display: flex; align-items: center; justify-content: center; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.5" cy="14.5" r="5" /><path d="M12 11 21 6v4l-6.6 2.4" /><path d="M8.5 14.5h.01" /></svg></span><span style="color: #4A5566; width: 76px; flex: none">{{info.arbLabel}}</span><span style="font-weight: 600">{{info.arb}}</span></div>
+        </sc-if>
+        <sc-if value="{{info.hasJo}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 10px; align-items: center; font-size: 13.5px"><span style="width: 28px; height: 28px; border-radius: 8px; background: #EEF1F6; display: flex; align-items: center; justify-content: center; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /><path d="M18 14a6 6 0 0 1 3.5 6" /></svg></span><span style="color: #4A5566; width: 76px; flex: none">JO</span><span style="font-weight: 600">{{info.jo}}</span></div>
+        </sc-if>
+        <sc-if value="{{info.hasNext}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; gap: 10px; align-items: center; font-size: 13.5px"><span style="width: 28px; height: 28px; border-radius: 8px; background: #EEF1F6; display: flex; align-items: center; justify-content: center; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg></span><span style="color: #4A5566; width: 76px; flex: none">Ensuite</span><span style="font-weight: 600">{{info.next}}</span></div>
+        </sc-if>
+        <sc-if value="{{routeOn}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; align-items: center; font-size: 13.5px"><span style="width: 28px; height: 28px; border-radius: 8px; background: #CFF04A; display: flex; align-items: center; justify-content: center; flex: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E1726" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.5" /><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5" /><circle cx="18" cy="5" r="2.5" /></svg></span><span style="color: #4A5566; width: 76px; flex: none">Trajet</span><span style="font-weight: 600">{{routeNote}}</span></div>
+        </sc-if>
+      </div>
+
+      <div style="display: flex; gap: 10px">
+        <sc-if value="{{info.hasRoute}}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{toggleRoute}}" aria-pressed="{{routePressed}}" style="flex: 1; height: 48px; border-radius: 14px; border: 0; background: #0E1726; color: #FFFFFF; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CFF04A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.5" /><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5" /><circle cx="18" cy="5" r="2.5" /></svg>{{routeLabel}}
+          </button>
+        </sc-if>
+        <sc-if value="{{info.noRoute}}" hint-placeholder-val="{{ false }}">
+          <a href="Live.dc.html" style="flex: 1; height: 48px; border-radius: 14px; background: #0E1726; color: #FFFFFF; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; text-decoration: none">Voir le programme</a>
+        </sc-if>
+        <button type="button" onClick="{{toggleFollow}}" aria-pressed="{{followPressed}}" style="height: 48px; padding: 0 16px; border-radius: 14px; border: 1.5px solid {{followBd}}; background: {{followBg}}; color: #0E1726; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z" /><path d="M10 21a2 2 0 0 0 4 0" /></svg>{{followLabel}}
+        </button>
+      </div>
+    </div>
+  </sc-if>
+
+  <nav aria-label="Navigation invité" style="position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; height: 84px; background: #FFFFFF; border-top: 1px solid #E1E4EA; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 6px 8px 22px">
+    <a href="Parcours.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.5" /><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5" /><circle cx="18" cy="5" r="2.5" /></svg></span>
+      Parcours
+    </a>
+    <a href="Carte.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #0E1726; font-size: 11.5px; font-weight: 700">
+      <span style="width: 54px; height: 30px; border-radius: 999px; background: #CFF04A; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg></span>
+      Carte
+    </a>
+    <a href="Live.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4" /></svg></span>
+      Live
+    </a>
+    <a href="Annonces.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="position: relative; width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg><span style="position: absolute; top: -2px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #C92A3A; color: #FFFFFF; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center">2</span></span>
+      Annonces
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'all', sel: 'basket-2', k: 0.72, cx: 860, cy: 545, route: false, follow: {}, dragging: false, hasSheet: true };
+    this.drag = null;
+  }
+
+  data() {
+    const COL = { basket: '#B84F0A', hand: '#2D5BD7', volley: '#7B45C9', foot: '#1E7F4C', athle: '#B4316B' };
+    const P = [
+      ['basket-1', 744.5, 523.7, 'basket', 'B1'], ['basket-2', 814.9, 510.5, 'basket', 'B2'], ['basket-3', 765.9, 649.8, 'basket', 'B3'], ['basket-4', 822.4, 639.2, 'basket', 'B4'],
+      ['basket-5', 506.0, 701.8, 'basket', 'B5'], ['basket-6', 571.9, 689.5, 'basket', 'B6'], ['basket-7', 1373.9, 403.3, 'basket', 'B7'], ['basket-8', 1396.8, 525.2, 'basket', 'B8'],
+      ['hand-1', 901.3, 503.5, 'hand', 'H1'], ['hand-2', 1000.0, 485.0, 'hand', 'H2'], ['hand-3', 264.1, 637.5, 'hand', 'H3'], ['hand-4', 371.2, 617.5, 'hand', 'H4'],
+      ['volley-1', 889.4, 646.7, 'volley', 'V1'], ['volley-2', 943.5, 636.6, 'volley', 'V2'], ['volley-3', 994.3, 627.1, 'volley', 'V3'], ['volley-4', 1050.2, 616.7, 'volley', 'V4'],
+      ['volley-5', 484.1, 562.8, 'volley', 'V5'], ['volley-6', 492.4, 607.0, 'volley', 'V6'], ['volley-7', 560.0, 574.2, 'volley', 'V7'],
+      ['foot', 963.0, 248.8, 'foot', 'Foot'],
+      ['depart-100', 594.3, 445.0, 'athle', 'flag'], ['arrivee', 783.0, 409.7, 'athle', 'finish'], ['sautoir-n', 1062.0, 432.7, 'athle', 'jump'], ['sautoir-s', 1099.2, 639.4, 'athle', 'jump'],
+      ['lancers', 1101.7, 525.0, 'athle', 'shot'], ['appel', 1120.0, 589.8, 'athle', 'call'],
+      ['accueil', 488.0, 257.3, 'services', 'i'], ['pc-orga', 545.0, 262.9, 'services', 'PC'],
+      ['vest-A', 218.7, 351.5, 'services', 'A'], ['vest-B', 385.8, 320.2, 'services', 'B'], ['vest-C', 242.6, 479.3, 'services', 'C'], ['vest-D', 409.7, 448.0, 'services', 'D'],
+      ['vest-E', 1558.8, 390.6, 'services', 'E'], ['vest-F', 1566.7, 460.4, 'services', 'F'],
+      ['secours', 611.9, 588.2, 'services', 'cross'], ['podium', 659.4, 711.5, 'services', 'trophy'], ['buvette', 1114.7, 469.7, 'services', 'cup'],
+      ['wc-1', 308.9, 398.7, 'services', 'WC'], ['wc-2', 1610.9, 484.6, 'services', 'WC']
+    ].map(([id, x, y, cat, code]) => ({ id, x, y, cat, code }));
+    const POLY = {
+      'basket-1': '701.6,470.7 765.4,458.7 787.5,576.7 723.6,588.6', 'basket-2': '771.2,457.6 836.5,445.4 858.6,563.4 793.3,575.6',
+      'basket-3': '730.7,614.1 785.8,603.8 801.1,685.5 746.0,695.8', 'basket-4': '786.8,603.6 842.8,593.1 858.1,674.9 802.1,685.4',
+      'hand-1': '839.2,427.2 931.6,409.9 963.4,579.8 871.0,597.1', 'hand-2': '938.3,408.7 1029.9,391.5 1061.7,561.4 970.1,578.5',
+      'volley-1': '861.8,610.3 902.1,602.8 917.1,683.2 876.8,690.7', 'volley-2': '916.8,600.0 955.2,592.8 970.2,673.2 931.9,680.4',
+      'volley-3': '967.7,590.5 1005.8,583.3 1020.8,663.8 982.8,670.9', 'volley-4': '1023.5,580.0 1061.8,572.9 1076.8,653.3 1038.5,660.4',
+      'hand-3': '191.6,549.3 299.7,529.1 336.5,725.7 228.4,745.9', 'hand-4': '302.7,528.5 403.0,509.8 439.7,706.4 339.5,725.1',
+      'basket-5': '469.8,665.7 526.8,655.0 542.3,738.0 485.3,748.7', 'basket-6': '534.6,653.5 593.6,642.5 609.2,725.5 550.2,736.6',
+      'basket-7': '1329.8,352.1 1396.6,339.6 1418.1,454.6 1351.3,467.1', 'basket-8': '1352.2,472.0 1419.0,459.5 1441.3,578.4 1374.5,591.0',
+      'volley-5': '442.6,547.6 517.3,533.7 525.6,577.9 450.9,591.9', 'volley-6': '450.9,591.9 525.6,577.9 533.9,622.1 459.1,636.1',
+      'volley-7': '529.1,537.0 575.3,528.4 590.9,611.4 544.7,620.1', 'foot': '770.8,192.2 1131.5,124.7 1164.7,301.6 803.9,369.1',
+      'vest-A': '109.0,336.4 430.5,276.2 466.9,470.9 145.5,531.0', 'vest-B': '109.0,336.4 430.5,276.2 466.9,470.9 145.5,531.0',
+      'vest-C': '109.0,336.4 430.5,276.2 466.9,470.9 145.5,531.0', 'vest-D': '109.0,336.4 430.5,276.2 466.9,470.9 145.5,531.0',
+      'vest-E': '1534.4,358.6 1569.8,351.9 1596.3,493.5 1560.9,500.1', 'vest-F': '1534.4,358.6 1569.8,351.9 1596.3,493.5 1560.9,500.1'
+    };
+    const ROUTES = {
+      'vest-B': '488.0,257.3 482.7,305.1 447.4,334.1 387.1,327.1',
+      'basket-2': '387.1,327.1 447.4,334.1 495.9,375.9 547.1,421.2 585.1,460.9 645.9,492.3 696.2,511.4 778.2,514.3 814.6,507.5',
+      'podium': '488.0,257.3 482.7,305.1 519.9,422.3 575.2,462.8 596.7,550.3 623.7,667.4 659.4,711.5',
+      'secours': '488.0,257.3 482.7,305.1 519.9,422.3 575.2,462.8 611.9,588.2',
+      'foot': '488.0,257.3 482.7,305.1 519.9,422.3 567.2,419.5 803.1,375.4 829.2,352.2'
+    };
+    const ROUTE_MIN = { 'vest-B': 2, 'basket-2': 4, 'podium': 4, 'secours': 3, 'foot': 4 };
+    const ROUTE_FROM = { 'vest-B': "depuis l'accueil", 'basket-2': 'depuis ton vestiaire', 'podium': "depuis l'accueil", 'secours': "depuis l'accueil", 'foot': "depuis l'accueil" };
+    const L = 'live', N = 'next', F = 'free';
+    const I = {
+      'basket-1': { t: 'Basket 1', pl: 'Intérieur de la piste', st: F, arb: 'Désigné à 13:30', jo: 'Youssef Amrani', next: '14:00 · Demi-finale 1 · 1er A – 2e B' },
+      'basket-2': { t: 'Basket 2', pl: 'Intérieur de la piste', st: L, comp: 'Basket filles U17 · Poule A', a: 'Lycée Lyautey', sa: '18', b: 'Lycée Victor Hugo', sb: '14', period: 'Q3 · 4:12', arb: 'Mehdi Tazi · Inès Alaoui', jo: 'Lina Chraibi, Omar Kettani', next: '14:00 · Demi-finale 2 · Descartes' },
+      'basket-3': { t: 'Basket 3', pl: 'Intérieur de la piste', st: L, comp: 'Basket filles U17 · Poule B', a: 'Lycée Louis-Massignon', sa: '22', b: 'Lycée Regnault', sb: '25', period: 'Q4 · 2:47', arb: 'Hamza Idrissi · Sofia Benjelloun', jo: 'Maya Sefrioui', next: '15:00 · Match de classement' },
+      'basket-4': { t: 'Basket 4', pl: 'Intérieur de la piste', st: F, jo: 'Salma Bennis', next: '14:50 · Match pour la 5e place' },
+      'basket-5': { t: 'Basket 5', pl: 'Plateau sportif ouest', st: F, desc: "Échauffement libre pour les équipes qui jouent dans l'heure.", jo: 'Nour Benkirane' },
+      'basket-6': { t: 'Basket 6', pl: 'Plateau sportif ouest', st: F, desc: "Échauffement libre pour les équipes qui jouent dans l'heure." },
+      'basket-7': { t: 'Basket 7', pl: 'Plateau est', st: F, desc: 'Terrain non utilisé aujourd’hui.' },
+      'basket-8': { t: 'Basket 8', pl: 'Plateau est', st: F, desc: 'Terrain non utilisé aujourd’hui.' },
+      'hand-1': { t: 'Hand 1', pl: 'Intérieur de la piste', st: L, comp: 'Hand garçons U17', a: 'Lycée Paul Valéry', sa: '9', b: 'Lycée Louis-Massignon', sb: '11', period: "2e MT · 12'", arb: 'Ilyas Bennani · Kenza Lahlou', jo: 'Rayan Berrada', next: '13:00 · Regnault – Lyautey' },
+      'hand-2': { t: 'Hand 2', pl: 'Intérieur de la piste', st: N, stLabel: '12:00', arb: 'À confirmer', jo: 'Salma Bennis', next: '12:00 · Descartes – Victor Hugo (décalé)' },
+      'hand-3': { t: 'Hand 3', pl: 'Plateau sportif ouest', st: F, next: '15:30 · Finale hand filles' },
+      'hand-4': { t: 'Hand 4', pl: 'Plateau sportif ouest', st: F, desc: 'Échauffement hand.' },
+      'volley-1': { t: 'Volley 1', pl: 'Intérieur de la piste', st: N, stLabel: '12:10', next: '12:10 · Massignon – Regnault', arb: 'Rania Filali', jo: 'Yanis Cherkaoui' },
+      'volley-2': { t: 'Volley 2', pl: 'Intérieur de la piste', st: L, comp: 'Volley mixte · sets', a: 'Lycée Descartes', sa: '1', b: 'Lycée Lyautey', sb: '0', period: 'Set 2 · 18–15', arb: 'Anas Tahiri', jo: 'Yanis Cherkaoui', next: '12:40 · Paul Valéry – Victor Hugo' },
+      'volley-3': { t: 'Volley 3', pl: 'Intérieur de la piste', st: F, next: '13:20 · Demi-finale volley' },
+      'volley-4': { t: 'Volley 4', pl: 'Intérieur de la piste', st: F, next: '13:20 · Demi-finale volley' },
+      'volley-5': { t: 'Volley 5', pl: 'Plateau sportif ouest', st: F, desc: 'Échauffement volley.' },
+      'volley-6': { t: 'Volley 6', pl: 'Plateau sportif ouest', st: F, desc: 'Échauffement volley.' },
+      'volley-7': { t: 'Volley 7', pl: 'Plateau sportif ouest', st: F, desc: 'Échauffement volley.' },
+      'foot': { t: 'Terrain de football', pl: 'Synthétique · nord du site', st: L, comp: 'Foot garçons', a: 'Lycée Lyautey', sa: '1', b: 'Lycée Regnault', sb: '1', period: "32'", arb: 'Ali Ouazzani', jo: 'Omar Kettani', next: '14:30 · Petite finale' },
+      'depart-100': { t: 'Départ 100 m', pl: 'Ligne droite nord, côté ouest', st: N, stLabel: '12:15', desc: "Appel des athlètes à 12:00 en chambre d'appel, avec le dossard.", arb: 'Starter · Kenza Lahlou', jo: 'Salma Bennis', next: '12:15 · 100 m filles · finale' },
+      'arrivee': { t: 'Arrivée', pl: 'Ligne droite nord', st: N, stLabel: '12:15', arb: 'Chrono · Anas Tahiri', jo: 'Maya Sefrioui', next: '12:15 · 100 m filles · finale' },
+      'sautoir-n': { t: 'Sautoir nord', pl: 'Intérieur de la piste, côté est', st: F, next: '14:30 · Longueur filles' },
+      'sautoir-s': { t: 'Sautoir sud', pl: 'Intérieur de la piste, côté est', st: F, next: '15:15 · Triple saut garçons' },
+      'lancers': { t: 'Aire de lancers', pl: 'Intérieur de la piste, côté est', st: L, stLabel: 'EN COURS', desc: 'Lancer de poids garçons · 3e essai.', arb: 'Juge · Rania Filali', jo: 'Youssef Amrani', next: '15:00 · Poids filles' },
+      'appel': { t: "Chambre d'appel", pl: 'Tente sud, intérieur de la piste', desc: "Présente-toi 15 min avant ta course avec ton dossard. Les JO t'emmènent au départ." },
+      'accueil': { t: 'Accueil', pl: "Parvis nord · entrée rue de l'Alma", desc: 'Infos, objets trouvés, clés des vestiaires. Ouvert 08:00 – 18:00.' },
+      'pc-orga': { t: 'PC organisation', pl: 'Pavillon nord', desc: 'Ambassadeurs du BDS : coordination, réclamations et résultats officiels.' },
+      'vest-A': { t: 'Vestiaire A', pl: 'Gymnase · entrée est', desc: 'Attribué au Lycée Lyautey.' },
+      'vest-B': { t: 'Vestiaire B', pl: 'Gymnase · entrée est · rez-de-chaussée', desc: 'Ton vestiaire : Lycée Descartes, basket filles. Clé à l’accueil.' },
+      'vest-C': { t: 'Vestiaire C', pl: 'Gymnase · entrée sud', desc: 'Attribué au Lycée Victor Hugo.' },
+      'vest-D': { t: 'Vestiaire D', pl: 'Gymnase · entrée sud', desc: 'Attribué au Lycée Louis-Massignon.' },
+      'vest-E': { t: 'Vestiaire E', pl: 'Bâtiment est 1', desc: 'Attribué au Lycée Paul Valéry.' },
+      'vest-F': { t: 'Vestiaire F', pl: 'Bâtiment est 1', desc: 'Attribué au Lycée Regnault.' },
+      'secours': { t: 'Poste de secours', pl: 'Ouest de la piste', desc: "Équipe de secours présente toute la journée. Au moindre souci, préviens un JO : il donne l'alerte." },
+      'podium': { t: 'Podium', pl: 'Sud-ouest de la piste', st: N, stLabel: '12:30', desc: 'Remises des prix : médailles et trophées.', next: '12:30 · Médailles athlétisme' },
+      'buvette': { t: 'Buvette & eau', pl: 'Intérieur de la piste, côté est', desc: 'Eau, fruits et collations. Pense à remplir ta gourde.' },
+      'wc-1': { t: 'Toilettes', pl: 'Gymnase' },
+      'wc-2': { t: 'Toilettes', pl: 'Bâtiment est 2' }
+    };
+    return { COL, P, POLY, ROUTES, ROUTE_FROM, ROUTE_MIN, I };
+  }
+
+  renderVals() {
+    const { COL, P, POLY, ROUTES, ROUTE_FROM, ROUTE_MIN, I } = this.data();
+    const s = this.state;
+    const k = s.k;
+    const AX = 195, AY = (k < 0.4 && s.filter === 'all') ? 300 : (s.hasSheet ? 262 : 400);
+    const ZOOMS = [0.205, 0.3, 0.45, 0.72, 1.05, 1.5];
+    const views = {
+      all: [870, 520, 0.5], basket: [960, 560, 0.4], hand: [640, 570, 0.45], volley: [770, 610, 0.55],
+      athle: [860, 540, 0.62], foot: [963, 249, 0.95], services: [470, 380, 0.5]
+    };
+    const go = (cx, cy, kk, extra) => this.setState(Object.assign({ cx, cy, k: kk }, extra || {}));
+
+    const map = { left: (AX - (s.cx - 50) * k).toFixed(1), top: (AY - (s.cy - 66) * k).toFixed(1), w: (1845 * k).toFixed(1), h: (842 * k).toFixed(1) };
+    const tr = s.dragging ? 'none' : 'left .45s cubic-bezier(.2,.7,.2,1), top .45s cubic-bezier(.2,.7,.2,1), width .45s cubic-bezier(.2,.7,.2,1), height .45s cubic-bezier(.2,.7,.2,1), transform .2s ease';
+
+    const overviewMode = k < 0.4 && s.filter === 'all';
+    const ZONES = [
+      { n: '1', label: 'Accueil', count: "Parvis nord · rue de l'Alma", x: 488, y: 257, v: [470, 290, 1.05] },
+      { n: '2', label: 'Gymnase', count: 'Vestiaires A à D', x: 288, y: 404, v: [300, 400, 0.95] },
+      { n: '3', label: 'Plateau ouest', count: '7 terrains', x: 420, y: 640, v: [420, 620, 0.8] },
+      { n: '4', label: 'Piste', count: '10 terrains · athlé', x: 905, y: 560, v: [880, 545, 0.72] },
+      { n: '5', label: 'Football', count: 'Synthétique', x: 963, y: 249, v: [963, 249, 0.95] },
+      { n: '6', label: 'Plateau est', count: '2 terrains', x: 1385, y: 465, v: [1385, 465, 0.95] },
+      { n: '7', label: 'Bâtiment est', count: 'Vestiaires E et F', x: 1580, y: 425, v: [1560, 425, 1.05] }
+    ];
+    const pickZone = (z) => () => go(z.v[0], z.v[1], z.v[2], { hasSheet: false, route: false });
+    const zoneList = ZONES.map((z) => ({ n: z.n, label: z.label, count: z.count, pick: pickZone(z) }));
+    const zones = overviewMode ? ZONES.map((z) => ({ n: z.n, aria: z.n + '. ' + z.label, left: (AX + (z.x - s.cx) * k).toFixed(1), top: (AY + (z.y - s.cy) * k).toFixed(1), pick: pickZone(z) })) : [];
+    const live = { 'basket-2': 1, 'basket-3': 1, 'hand-1': 1, 'volley-2': 1, 'foot': 1, 'lancers': 1 };
+    const pins = overviewMode ? [] : P.filter((p) => s.filter === 'all' || p.cat === s.filter).map((p) => {
+      const sel = p.id === s.sel;
+      const isVest = p.id.indexOf('vest-') === 0;
+      const isPill = ['basket', 'hand', 'volley', 'foot'].indexOf(p.cat) >= 0;
+      const isRound = !isPill && !isVest;
+      const svc = { accueil: ['#CFF04A', '#0E1726', '#0E1726'], 'pc-orga': ['#FFFFFF', '#0E1726', '#0E1726'], secours: ['#127A55', '#FFFFFF', '#FFFFFF'], podium: ['#8A6500', '#FFFFFF', '#FFFFFF'], buvette: ['#0E6F8A', '#FFFFFF', '#FFFFFF'], 'wc-1': ['#4A5566', '#FFFFFF', '#FFFFFF'], 'wc-2': ['#4A5566', '#FFFFFF', '#FFFFFF'] }[p.id];
+      const bg = p.cat === 'athle' ? COL.athle : (svc ? svc[0] : COL[p.cat]);
+      const textCode = ['i', 'PC', 'WC'].indexOf(p.code) >= 0;
+      const info = I[p.id] || {};
+      return {
+        id: p.id, code: p.code === 'i' ? 'i' : p.code, isPill, isVest, isRound, bg, fg: svc ? svc[1] : '#FFFFFF', bd: svc ? (p.id === 'accueil' || p.id === 'pc-orga' ? '#0E1726' : '#FFFFFF') : '#FFFFFF',
+        iText: textCode, iFlag: p.code === 'flag', iFinish: p.code === 'finish', iJump: p.code === 'jump', iShot: p.code === 'shot', iCall: p.code === 'call', iTrophy: p.code === 'trophy', iCup: p.code === 'cup', iCross: p.code === 'cross',
+        live: !!live[p.id], mine: p.id === 'vest-B',
+        left: (AX + (p.x - s.cx) * k).toFixed(1), top: (AY + (p.y - s.cy) * k).toFixed(1),
+        z: sel ? 40 : (isVest ? 14 : 10), scale: sel ? 1.18 : 1,
+        ring: sel ? '0 0 0 3px #0E1726, 0 8px 18px rgba(14,23,38,0.35)' : (p.id === 'vest-B' ? '0 0 0 3px #CFF04A, 0 3px 8px rgba(14,23,38,0.3)' : '0 2px 7px rgba(14,23,38,0.28)'),
+        aria: (info.t || p.id) + (live[p.id] ? ', en direct' : ''),
+        pick: () => go(p.x, p.y, Math.max(this.state.k, 0.72), { sel: p.id, route: false, hasSheet: true })
+      };
+    });
+
+    const CHIPS = [['all', 'Tout', null], ['basket', 'Basket', COL.basket], ['hand', 'Hand', COL.hand], ['volley', 'Volley', COL.volley], ['athle', 'Athlé', COL.athle], ['foot', 'Foot', COL.foot], ['services', 'Services', '#CFF04A']];
+    const chips = CHIPS.map(([id, label, dot]) => {
+      const on = s.filter === id;
+      return {
+        label, hasDot: !!dot, dot: dot || '#FFFFFF', dotRing: dot === '#CFF04A' ? '#0E1726' : 'transparent',
+        bg: on ? '#0E1726' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0E1726', bd: on ? '#0E1726' : '#E1E4EA', pressed: on ? 'true' : 'false',
+        pick: () => { const v = views[id]; go(v[0], v[1], v[2], { filter: id, hasSheet: false, route: false }); }
+      };
+    });
+
+    const selP = P.find((p) => p.id === s.sel);
+    const d = I[s.sel] || {};
+    const cat = selP ? selP.cat : 'services';
+    const STATUS = {
+      live: ['EN DIRECT', '#FCE9EA', '#9E1C2A'], next: ['À VENIR', '#EEF1F6', '#0E1726'], free: ['LIBRE', '#E6F4EC', '#1A6340']
+    };
+    const st = d.st ? STATUS[d.st] : null;
+    let color = COL[cat] || '#0E1726', fg = '#FFFFFF', code = selP ? selP.code : '';
+    if (selP && selP.id.indexOf('vest-') === 0) { color = '#0E1726'; fg = '#CFF04A'; }
+    if (selP && cat === 'athle') { code = 'ATH'; }
+    if (selP && selP.id === 'accueil') { color = '#CFF04A'; fg = '#0E1726'; code = 'i'; }
+    if (selP && ['pc-orga', 'wc-1', 'wc-2'].indexOf(selP.id) >= 0) { color = '#4A5566'; code = selP.code; }
+    if (selP && selP.id === 'secours') { color = '#127A55'; code = '+'; }
+    if (selP && selP.id === 'podium') { color = '#8A6500'; code = '1er'; }
+    if (selP && selP.id === 'buvette') { color = '#0E6F8A'; code = 'EAU'; }
+    if (selP && cat === 'foot') { code = 'F'; }
+    const hasRoute = !!ROUTES[s.sel];
+    const info = {
+      title: d.t || '', place: d.pl || '', code, color, fg,
+      hasStatus: !!st, isLive: d.st === 'live', stLabel: d.stLabel || (st ? st[0] : ''), stBg: st ? st[1] : '#FFFFFF', stFg: st ? st[2] : '#0E1726',
+      hasScore: !!d.a, comp: d.comp || '', a: d.a || '', sa: d.sa || '', b: d.b || '', sb: d.sb || '', period: d.period || '',
+      hasDesc: !!d.desc, desc: d.desc || '',
+      hasArb: !!d.arb, arb: d.arb || '', arbLabel: cat === 'athle' ? 'Officiel' : 'Arbitrage',
+      hasJo: !!d.jo, jo: d.jo || '', hasNext: !!d.next, next: d.next || '',
+      hasRoute, noRoute: !hasRoute && ['basket', 'hand', 'volley', 'foot', 'athle'].indexOf(cat) >= 0
+    };
+
+    const poly = POLY[s.sel];
+    const hl = { points: poly || '0,0', color: color, sw: (3 / Math.max(k, 0.2)).toFixed(2), op: (poly && s.hasSheet && !overviewMode) ? '1' : '0' };
+    const routeOn = s.route && hasRoute;
+    const route = { points: ROUTES[s.sel] || '0,0 0,0', op: routeOn ? '1' : '0', w1: (9 / Math.max(k, 0.3)).toFixed(1), w2: (4.6 / Math.max(k, 0.3)).toFixed(1), dash: (12 / Math.max(k, 0.3)).toFixed(1) + ' ' + (8 / Math.max(k, 0.3)).toFixed(1) };
+    const following = !!s.follow[s.sel];
+
+    return {
+      map, tr, zones, zoneList, overviewMode, pins, chips, info, hl, route, hasSheet: s.hasSheet && !!d.t && !overviewMode,
+      cursor: s.dragging ? 'grabbing' : 'grab',
+      ctrlTop: 158,
+      routeLabel: routeOn ? 'Masquer le trajet' : 'Itinéraire',
+      routeOn,
+      routeNote: (ROUTE_FROM[s.sel] ? ROUTE_FROM[s.sel].charAt(0).toUpperCase() + ROUTE_FROM[s.sel].slice(1) : '') + ' · ≈ ' + (ROUTE_MIN[s.sel] || 3) + ' min à pied',
+      routePressed: routeOn ? 'true' : 'false',
+      followLabel: following ? 'Suivi' : 'Suivre', followPressed: following ? 'true' : 'false',
+      followBg: following ? '#CFF04A' : '#FFFFFF', followBd: following ? '#0E1726' : '#CBD2DD',
+      toggleRoute: () => this.setState({ route: !this.state.route }),
+      toggleFollow: () => { const f = Object.assign({}, this.state.follow); f[this.state.sel] = !f[this.state.sel]; this.setState({ follow: f }); },
+      closeSheet: () => this.setState({ hasSheet: false, route: false }),
+      zoomIn: () => { const n = ZOOMS.find((z) => z > this.state.k + 0.001); if (n) this.setState({ k: n }); },
+      zoomOut: () => { const lower = ZOOMS.filter((z) => z < this.state.k - 0.001); if (lower.length) this.setState({ k: lower[lower.length - 1] }); },
+      overview: () => go(965, 487, 0.205, { filter: 'all', hasSheet: false, route: false }),
+      onDown: (e) => {
+        if (e.target && e.target.closest && e.target.closest('button')) return;
+        this.drag = { x: e.clientX, y: e.clientY, cx: this.state.cx, cy: this.state.cy, moved: false };
+        this.setState({ dragging: true });
+      },
+      onMove: (e) => {
+        if (!this.drag) return;
+        const dx = e.clientX - this.drag.x, dy = e.clientY - this.drag.y;
+        if (Math.abs(dx) + Math.abs(dy) > 3) this.drag.moved = true;
+        const kk = this.state.k;
+        const cx = Math.min(1880, Math.max(60, this.drag.cx - dx / kk));
+        const cy = Math.min(900, Math.max(80, this.drag.cy - dy / kk));
+        this.setState({ cx, cy });
+      },
+      onUp: () => { if (this.drag) { this.drag = null; this.setState({ dragging: false }); } }
+    };
+  }
+}
+</script>
+</body>
+</html>

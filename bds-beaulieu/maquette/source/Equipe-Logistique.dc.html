@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Guilde Logistique — accueil et placement des JO</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#0E1726}a:hover{color:#2D5BD7}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+  <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 84px; overflow-y: auto">
+    <div style="background: #0E1726; color: #FFFFFF; padding: 48px 16px 18px; display: flex; align-items: center; gap: 12px">
+      <span style="width: 44px; height: 44px; border-radius: 13px; background: #F2C94C; color: #0E1726; display: flex; align-items: center; justify-content: center; flex: none">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4v10l-9 4-9-4z" /><path d="m3 7 9 4 9-4" /><path d="M12 11v10" /></svg>
+      </span>
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 25px; line-height: 1">Guilde Logistique</span>
+        <span style="font-size: 13px; color: rgba(255,255,255,0.75)">Adam El Fassi · chef de poste</span>
+      </div>
+      <span style="height: 28px; padding: 0 10px; border-radius: 999px; background: rgba(207,240,74,0.14); color: #CFF04A; font-size: 11.5px; font-weight: 800; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #CFF04A"></span>EN POSTE</span>
+    </div>
+
+    <div style="padding: 14px 16px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.4px; color: #4A5566">TON POSTE · 09:15</span>
+          <span style="font-size: 12.5px; font-weight: 600; color: #4A5566">08:30 – 12:00</span>
+        </div>
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 27px; line-height: 1">Accueil · parvis nord</span>
+        <span style="font-size: 13.5px; color: #2B3545">Avec Lina Chraibi et Omar Kettani. Clés des vestiaires et bracelets JO à distribuer.</span>
+        <div style="display: flex; gap: 8px">
+          <a href="Carte.dc.html" style="flex: 1; height: 44px; border-radius: 12px; background: #0E1726; color: #FFFFFF; text-decoration: none; font-size: 13.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 7px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>Voir sur la carte
+          </a>
+          <button type="button" style="flex: 1; height: 44px; border-radius: 12px; border: 1.5px solid #CBD2DD; background: #FFFFFF; font-size: 13.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B84F0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2 20h20z" /><path d="M12 10v4" /><path d="M12 17v.01" /></svg>Signaler
+          </button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 12px; font-weight: 600; color: #4A5566">JO présents</span>
+          <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1">{{jo}}<span style="font-size: 20px; color: #4A5566"> / 38</span></span>
+          <button type="button" onClick="{{addJo}}" style="height: 44px; border-radius: 12px; border: 0; background: #CFF04A; color: #0E1726; font-size: 13.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14" /><path d="M5 12h14" /></svg>Pointer un JO
+          </button>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 12px; font-weight: 600; color: #4A5566">Délégations arrivées</span>
+          <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1">{{arrivedCount}}<span style="font-size: 20px; color: #4A5566"> / 6</span></span>
+          <div style="height: 44px; display: flex; align-items: center">
+            <div style="flex: 1; height: 10px; border-radius: 999px; background: #E6E8EC; overflow: hidden"><div style="width: {{arrivedPct}}%; height: 10px; border-radius: 999px; background: #0E1726; transition: width .3s ease"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="margin: 6px 4px 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px">Arrivées des délégations</h2>
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; display: flex; flex-direction: column">
+        <sc-for list="{{delegs}}" as="d" hint-placeholder-count="6">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-bottom: 1px solid #EEF0F3; min-height: 64px">
+            <span aria-label="{{d.vestLabel}}" style="width: 34px; height: 34px; border-radius: 9px; background: #0E1726; color: #CFF04A; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 20px; flex: none">{{d.vest}}</span>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <span style="font-size: 14.5px; font-weight: 600">{{d.name}}</span>
+              <span style="font-size: 12.5px; color: {{d.stColor}}; font-weight: 600">{{d.status}}</span>
+            </div>
+            <sc-if value="{{d.done}}" hint-placeholder-val="{{ true }}">
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: #E6F4EC; color: #1A6340; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg></span>
+            </sc-if>
+            <sc-if value="{{d.todo}}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{d.checkin}}" style="height: 40px; padding: 0 12px; border-radius: 11px; border: 1.5px solid #0E1726; background: #FFFFFF; font-size: 13px; font-weight: 700; cursor: pointer">Pointer</button>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin: 6px 4px 0">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 22px">Placement des JO</h2>
+        <span style="font-size: 12.5px; color: #4A5566">besoin / présents</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 6px 12px; display: flex; flex-direction: column">
+        <sc-for list="{{zones}}" as="z" hint-placeholder-count="6">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #EEF0F3">
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+              <div style="display: flex; justify-content: space-between; font-size: 13.5px"><span style="font-weight: 600">{{z.name}}</span><span style="font-weight: 700">{{z.have}} / {{z.need}}</span></div>
+              <div style="height: 6px; border-radius: 999px; background: #E6E8EC; overflow: hidden"><div style="width: {{z.pct}}%; height: 6px; border-radius: 999px; background: {{z.bar}}"></div></div>
+            </div>
+            <sc-if value="{{z.short}}" hint-placeholder-val="{{ false }}">
+              <span style="height: 24px; padding: 0 8px; border-radius: 7px; background: #FDEBDD; color: #8A3A06; font-size: 12px; font-weight: 800; display: flex; align-items: center">{{z.gap}}</span>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Navigation équipe" style="position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; height: 84px; background: #0E1726; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 6px 8px 22px">
+    <a href="Equipe-Logistique.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #FFFFFF; font-size: 11.5px; font-weight: 700">
+      <span style="width: 54px; height: 30px; border-radius: 999px; background: #CFF04A; color: #0E1726; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z" /><path d="M7 5H5v15h14V5h-2" /><path d="m9 13 2 2 4-4" /></svg></span>
+      Mission
+    </a>
+    <a href="Carte.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg></span>
+      Carte
+    </a>
+    <a href="Annonces.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg></span>
+      Annonces
+    </a>
+    <a href="Equipe-Connexion.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /><path d="M18 14a6 6 0 0 1 3.5 6" /></svg></span>
+      Guildes
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { jo: 31, arrived: { lyautey: '08:52', massignon: '08:58', descartes: '09:04' } };
+  }
+  renderVals() {
+    const s = this.state;
+    const D = [
+      ['lyautey', 'Lycée Lyautey', 'A', 'attendue 08:45'],
+      ['massignon', 'Lycée Louis-Massignon', 'D', 'attendue 09:00'],
+      ['descartes', 'Lycée Descartes', 'B', 'attendue 09:00'],
+      ['victorhugo', 'Lycée Victor Hugo', 'C', 'en approche · car à 5 min'],
+      ['paulvalery', 'Lycée Paul Valéry', 'E', 'attendue 09:30'],
+      ['regnault', 'Lycée Regnault', 'F', 'attendue 09:45']
+    ];
+    const delegs = D.map(([id, name, vest, wait]) => {
+      const t = s.arrived[id];
+      return {
+        name, vest, vestLabel: 'Vestiaire ' + vest, done: !!t, todo: !t,
+        status: t ? 'Arrivée à ' + t + ' · vestiaire ' + vest : wait,
+        stColor: t ? '#1A6340' : (id === 'victorhugo' ? '#8A3A06' : '#4A5566'),
+        checkin: () => { const a = Object.assign({}, this.state.arrived); a[id] = '09:15'; this.setState({ arrived: a }); }
+      };
+    });
+    const n = Object.keys(s.arrived).length;
+    const Z = [['Accueil', 4, 4], ['Intérieur de la piste', 12, 10], ['Plateau sportif ouest', 8, 6], ['Piste & sautoirs', 6, 5], ['Football', 4, 4], ['Buvette & secours', 4, 2]];
+    const zones = Z.map(([name, need, have]) => ({
+      name, need, have, pct: Math.round(100 * have / need), bar: have >= need ? '#1E7F4C' : '#D9822B', short: have < need, gap: '−' + (need - have)
+    }));
+    return {
+      delegs, zones, jo: s.jo, arrivedCount: n, arrivedPct: Math.round(100 * n / 6),
+      addJo: () => this.setState({ jo: Math.min(38, this.state.jo + 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

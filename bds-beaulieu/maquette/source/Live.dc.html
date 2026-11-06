@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Invité — live et programme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#0E1726}a:hover{color:#2D5BD7}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+.no-sb{scrollbar-width:none}.no-sb::-webkit-scrollbar{display:none}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(201,42,58,.6)}70%{box-shadow:0 0 0 7px rgba(201,42,58,0)}100%{box-shadow:0 0 0 0 rgba(201,42,58,0)}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+  <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 84px; overflow-y: auto">
+    <div style="padding: 50px 16px 24px; display: flex; flex-direction: column; gap: 14px">
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; padding: 0 4px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h1 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 40px; line-height: 1">Live</h1>
+          <span style="display: flex; align-items: center; gap: 7px; font-size: 13px; color: #4A5566"><span style="width: 8px; height: 8px; border-radius: 50%; background: #C92A3A; animation: livepulse 1.6s ease-out infinite"></span>Mis à jour à 11:42 · Tournoi inter-lycées</span>
+        </div>
+        <a href="Carte.dc.html" aria-label="Voir les terrains sur la carte" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E1E4EA; display: flex; align-items: center; justify-content: center; color: #0E1726">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>
+        </a>
+      </div>
+
+      <div role="tablist" aria-label="Vue" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 16px; background: #E6E8E2">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+          <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="height: 44px; border-radius: 12px; border: 0; background: {{t.bg}}; color: {{t.fg}}; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: {{t.shadow}}; cursor: pointer">{{t.label}}<span style="font-size: 12px; font-weight: 600; color: {{t.countFg}}">{{t.count}}</span></button>
+        </sc-for>
+      </div>
+
+      <a href="Carte.dc.html" style="text-decoration: none; color: #FFFFFF; background: #0E1726; border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.4px; color: rgba(255,255,255,0.72)">TON ÉQUIPE · LYCÉE DESCARTES</span>
+          <span style="height: 24px; padding: 0 9px; border-radius: 7px; background: #CFF04A; color: #0E1726; font-size: 11px; font-weight: 800; letter-spacing: 0.4px; display: flex; align-items: center; gap: 5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg>QUALIFIÉES</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px">
+          <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1; color: #CFF04A">14:00</span>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 16px; font-weight: 700">Demi-finale 2 · Basket 2</span>
+            <span style="font-size: 13px; color: rgba(255,255,255,0.78)">Contre le 1er de la poule B · rendez-vous 13:45</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="no-sb" style="display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px; padding: 0 16px">
+        <sc-for list="{{chips}}" as="c" hint-placeholder-count="6">
+          <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="flex: none; height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 7px; cursor: pointer">
+            <sc-if value="{{c.hasDot}}" hint-placeholder-val="{{ true }}"><span style="width: 9px; height: 9px; border-radius: 50%; background: {{c.dot}}"></span></sc-if>{{c.label}}
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{showLive}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{live}}" as="m" hint-placeholder-count="4">
+            <a href="Carte.dc.html" style="text-decoration: none; color: #0E1726; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; align-items: center; gap: 8px">
+                <span style="height: 22px; padding: 0 8px; border-radius: 6px; background: {{m.color}}; color: #FFFFFF; font-size: 11px; font-weight: 800; letter-spacing: 0.3px; display: flex; align-items: center">{{m.court}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12.5px; color: #4A5566; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{m.comp}}</span>
+                <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #9E1C2A; white-space: nowrap"><span style="width: 7px; height: 7px; border-radius: 50%; background: #C92A3A"></span>{{m.period}}</span>
+              </div>
+              <sc-if value="{{m.duel}}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-direction: column; gap: 4px">
+                  <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: {{m.wa}}">{{m.a}}</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; color: {{m.ca}}">{{m.sa}}</span></div>
+                  <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: {{m.wb}}">{{m.b}}</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; color: {{m.cb}}">{{m.sb}}</span></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{m.solo}}" hint-placeholder-val="{{ false }}">
+                <span style="font-size: 15px; font-weight: 600">{{m.a}}</span>
+              </sc-if>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4A5566; border-top: 1px solid #EEF0F3; padding-top: 8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.5" cy="14.5" r="5" /><path d="M12 11 21 6v4l-6.6 2.4" /></svg>
+                <span>{{m.staff}}</span>
+              </div>
+            </a>
+          </sc-for>
+          <sc-if value="{{emptyLive}}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 24px 8px; text-align: center; font-size: 14px; color: #4A5566">Aucun match en cours dans cette discipline.</p>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{showNext}}" hint-placeholder-val="{{ false }}">
+        <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; display: flex; flex-direction: column">
+          <sc-for list="{{upcoming}}" as="u" hint-placeholder-count="6">
+            <div style="display: flex; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3; align-items: flex-start">
+              <span style="width: 50px; flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.15">{{u.time}}</span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+                <span style="width: fit-content; height: 20px; padding: 0 7px; border-radius: 6px; background: {{u.color}}; color: #FFFFFF; font-size: 10.5px; font-weight: 800; letter-spacing: 0.3px; display: flex; align-items: center">{{u.court}}</span>
+                <span style="font-size: 14.5px; font-weight: 600">{{u.title}}</span>
+                <span style="font-size: 12.5px; color: #4A5566">{{u.sub}}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{showRes}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{results}}" as="r" hint-placeholder-count="4">
+            <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
+              <div style="display: flex; align-items: center; gap: 8px">
+                <span style="height: 22px; padding: 0 8px; border-radius: 6px; background: {{r.color}}; color: #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center">{{r.court}}</span>
+                <span style="flex: 1; min-width: 0; font-size: 12.5px; color: #4A5566">{{r.comp}}</span>
+                <span style="font-size: 12px; font-weight: 600; color: #4A5566">{{r.time}} · Final</span>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: {{r.wa}}">{{r.a}}</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1; color: {{r.ca}}">{{r.sa}}</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between"><span style="font-size: 15px; font-weight: {{r.wb}}">{{r.b}}</span><span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1; color: {{r.cb}}">{{r.sb}}</span></div>
+              <sc-if value="{{r.hasNote}}" hint-placeholder-val="{{ false }}">
+                <span style="width: fit-content; height: 24px; padding: 0 9px; border-radius: 7px; background: #F1F8D6; color: #3D4A0E; font-size: 12px; font-weight: 700; display: flex; align-items: center">{{r.note}}</span>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <nav aria-label="Navigation invité" style="position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; height: 84px; background: #FFFFFF; border-top: 1px solid #E1E4EA; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 6px 8px 22px">
+    <a href="Parcours.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.5" /><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5" /><circle cx="18" cy="5" r="2.5" /></svg></span>
+      Parcours
+    </a>
+    <a href="Carte.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg></span>
+      Carte
+    </a>
+    <a href="Live.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #0E1726; font-size: 11.5px; font-weight: 700">
+      <span style="width: 54px; height: 30px; border-radius: 999px; background: #CFF04A; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4" /></svg></span>
+      Live
+    </a>
+    <a href="Annonces.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="position: relative; width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg><span style="position: absolute; top: -2px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #C92A3A; color: #FFFFFF; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center">2</span></span>
+      Annonces
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'live', disc: 'all' };
+  }
+  renderVals() {
+    const s = this.state;
+    const COL = { basket: '#B84F0A', hand: '#2D5BD7', volley: '#7B45C9', foot: '#1E7F4C', athle: '#B4316B', podium: '#8A6500' };
+    const duel = (d, court, comp, a, sa, b, sb, period, staff) => {
+      const na = parseFloat(sa), nb = parseFloat(sb);
+      return { d, color: COL[d], court, comp, a, sa, b, sb, period, staff, duel: true, solo: false,
+        wa: na > nb ? 700 : 500, wb: nb > na ? 700 : 500, ca: na >= nb ? '#0E1726' : '#6B7585', cb: nb >= na ? '#0E1726' : '#6B7585' };
+    };
+    const LIVE = [
+      duel('basket', 'BASKET 2', 'Basket filles U17 · Poule A', 'Lycée Lyautey', '18', 'Lycée Victor Hugo', '14', 'Q3 · 4:12', 'Mehdi Tazi, Inès Alaoui · JO Lina C., Omar K.'),
+      duel('basket', 'BASKET 3', 'Basket filles U17 · Poule B', 'Lycée Louis-Massignon', '22', 'Lycée Regnault', '25', 'Q4 · 2:47', 'Hamza Idrissi, Sofia Benjelloun · JO Maya S.'),
+      duel('hand', 'HAND 1', 'Hand garçons U17', 'Lycée Paul Valéry', '9', 'Lycée Louis-Massignon', '11', "2e MT · 12'", 'Ilyas Bennani, Kenza Lahlou · JO Rayan B.'),
+      duel('volley', 'VOLLEY 2', 'Volley mixte · sets', 'Lycée Descartes', '1', 'Lycée Lyautey', '0', 'Set 2 · 18–15', 'Anas Tahiri · JO Yanis C.'),
+      duel('foot', 'FOOT', 'Foot garçons', 'Lycée Lyautey', '1', 'Lycée Regnault', '1', "32'", 'Ali Ouazzani · JO Omar K.'),
+      { d: 'athle', color: COL.athle, court: 'LANCERS', comp: 'Lancer de poids garçons', a: 'En tête : Lycée Regnault · 12,84 m', period: '3e essai', staff: 'Juge Rania Filali · JO Youssef A.', duel: false, solo: true }
+    ];
+    const UP = [
+      ['12:00', 'hand', 'HAND 2', 'Descartes – Victor Hugo', 'Hand garçons U17 · décalé de 15 min'],
+      ['12:10', 'volley', 'VOLLEY 1', 'Massignon – Regnault', 'Volley mixte'],
+      ['12:15', 'athle', 'PISTE', '100 m filles · finale', "Départ ligne droite nord · appel 12:00"],
+      ['12:30', 'podium', 'PODIUM', 'Médailles athlétisme', 'Sud-ouest de la piste'],
+      ['13:00', 'hand', 'HAND 1', 'Regnault – Lyautey', 'Hand garçons U17'],
+      ['14:00', 'basket', 'BASKET 1', 'Demi-finale 1 · 1er A – 2e B', 'Basket filles U17'],
+      ['14:00', 'basket', 'BASKET 2', 'Demi-finale 2 · Descartes – 1er B', 'Basket filles U17'],
+      ['16:00', 'basket', 'BASKET 1', 'Finale basket filles', 'Basket filles U17'],
+      ['17:00', 'podium', 'PODIUM', 'Remise des trophées', 'Tous les lauréats']
+    ].map(([time, d, court, title, sub]) => ({ time, d, color: COL[d], court, title, sub }));
+    const res = (time, d, court, comp, a, sa, b, sb, note) => {
+      const na = parseFloat(sa), nb = parseFloat(sb);
+      return { time, d, color: COL[d], court, comp, a, sa, b, sb, note: note || '', hasNote: !!note,
+        wa: na > nb ? 700 : 500, wb: nb > na ? 700 : 500, ca: na >= nb ? '#0E1726' : '#6B7585', cb: nb >= na ? '#0E1726' : '#6B7585' };
+    };
+    const RES = [
+      res('10:30', 'basket', 'BASKET 1', 'Basket filles U17 · Poule A', 'Lycée Descartes', '32', 'Lycée Victor Hugo', '27', 'Descartes qualifiées en demi-finale'),
+      res('10:30', 'basket', 'BASKET 4', 'Basket filles U17 · Poule B', 'Lycée Paul Valéry', '26', 'Lycée Regnault', '29'),
+      res('10:15', 'volley', 'VOLLEY 3', 'Volley mixte · sets', 'Lycée Louis-Massignon', '2', 'Lycée Paul Valéry', '1'),
+      res('09:40', 'basket', 'BASKET 2', 'Basket filles U17 · Poule A', 'Lycée Lyautey', '28', 'Lycée Descartes', '24'),
+      res('09:40', 'basket', 'BASKET 3', 'Basket filles U17 · Poule B', 'Lycée Louis-Massignon', '30', 'Lycée Paul Valéry', '22')
+    ];
+    const f = (arr) => arr.filter((x) => s.disc === 'all' || x.d === s.disc || (s.disc === 'athle' && x.d === 'podium'));
+    const live = f(LIVE), upcoming = f(UP), results = f(RES);
+    const TABS = [['live', 'En direct', LIVE.length], ['next', 'À venir', null], ['res', 'Résultats', null]];
+    const tabs = TABS.map(([id, label, count]) => {
+      const on = s.tab === id;
+      return { label, count: count ? String(count) : '', sel: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#0E1726' : '#4A5566',
+        shadow: on ? '0 1px 3px rgba(14,23,38,0.12)' : 'none', countFg: on ? '#9E1C2A' : '#4A5566', pick: () => this.setState({ tab: id }) };
+    });
+    const CH = [['all', 'Tout', null], ['basket', 'Basket', COL.basket], ['hand', 'Hand', COL.hand], ['volley', 'Volley', COL.volley], ['athle', 'Athlé', COL.athle], ['foot', 'Foot', COL.foot]];
+    const chips = CH.map(([id, label, dot]) => {
+      const on = s.disc === id;
+      return { label, hasDot: !!dot, dot: dot || '#FFFFFF', bg: on ? '#0E1726' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0E1726', bd: on ? '#0E1726' : '#E1E4EA', pressed: on ? 'true' : 'false', pick: () => this.setState({ disc: id }) };
+    });
+    return {
+      tabs, chips, live, upcoming, results,
+      showLive: s.tab === 'live', showNext: s.tab === 'next', showRes: s.tab === 'res',
+      emptyLive: s.tab === 'live' && live.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — programme et qualifications</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#2D5BD7}a:hover{color:#1F46B0}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+
+  <aside style="flex: 1 1 236px; background: #0E1726; color: #FFFFFF; padding: 22px 14px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 11px; background: #CFF04A; color: #0E1726; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 23px">B</div>
+      <div style="display: flex; flex-direction: column; line-height: 1.1">
+        <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: 1.6px">BEAULIEU</span>
+        <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: #CFF04A">ADMIN · BDS</span>
+      </div>
+    </div>
+    <div style="border-radius: 12px; background: rgba(255,255,255,0.06); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 600">Événement</span>
+      <span style="font-size: 13.5px; font-weight: 700">Tournoi inter-lycées</span>
+      <span style="font-size: 12px; color: rgba(255,255,255,0.7)">Sam. 21 nov. · Beaulieu</span>
+    </div>
+    <nav aria-label="Administration" style="display: flex; flex-direction: column; gap: 4px">
+      <a href="Admin-Tableau.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4z" /><path d="M13 4h7v4h-7z" /><path d="M13 10h7v10h-7z" /><path d="M4 13h7v7H4z" /></svg>Vue d'ensemble</a>
+      <a href="Admin-Carte.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg>Carte &amp; points</a>
+      <a href="Admin-Programme.dc.html" aria-current="page" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; background: #CFF04A; color: #0E1726; font-size: 13.5px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18" /><path d="M8 3v4" /><path d="M16 3v4" /></svg>Programme &amp; qualifs</a>
+      <a href="Admin-Delegations.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0" /><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8" /><path d="M18 14a6 6 0 0 1 3.5 6" /></svg>Délégations &amp; vestiaires</a>
+      <a href="Admin-Tableau.dc.html#annonce" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg>Annonces</a>
+      <a href="Equipe-Ambassadeurs.dc.html" style="min-height: 42px; border-radius: 11px; padding: 0 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(255,255,255,0.85); font-size: 13.5px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.9L12 16.4l-5.2 2.8 1-5.9L3.5 9.2l5.9-.9z" /></svg>Guildes &amp; JO</a>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px">
+        <h1 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 38px; line-height: 1">Programme &amp; qualifications</h1>
+        <span style="font-size: 13.5px; color: #4A5566">Planning des terrains, tableaux et désignations · 11:42</span>
+      </div>
+      <button type="button" style="height: 44px; padding: 0 16px; border-radius: 12px; border: 0; background: #0E1726; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; cursor: pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#CFF04A" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14" /><path d="M5 12h14" /></svg>Ajouter un match</button>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+        <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; flex: 1 1 auto">Planning des terrains</h2>
+        <sc-for list="{{chips}}" as="c" hint-placeholder-count="6">
+          <button type="button" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}" style="height: 34px; padding: 0 11px; border-radius: 999px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer"><sc-if value="{{c.hasDot}}" hint-placeholder-val="{{ true }}"><span style="width: 8px; height: 8px; border-radius: 50%; background: {{c.dot}}"></span></sc-if>{{c.label}}</button>
+        </sc-for>
+      </div>
+      <div style="overflow-x: auto">
+        <div style="min-width: 980px; display: flex; flex-direction: column">
+          <div style="display: flex; padding-left: 128px; height: 26px; font-size: 11.5px; font-weight: 700; color: #4A5566">
+            <sc-for list="{{hours}}" as="h" hint-placeholder-count="10">
+              <span style="flex: 1 1 0; border-left: 1px solid #E1E4EA; padding-left: 5px">{{h}}</span>
+            </sc-for>
+          </div>
+          <sc-for list="{{lanes}}" as="ln" hint-placeholder-count="14">
+            <div style="display: flex; align-items: stretch; height: 40px; border-top: 1px solid #EEF0F3">
+              <span style="width: 128px; flex: none; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600"><span style="width: 9px; height: 9px; border-radius: 3px; background: {{ln.color}}"></span>{{ln.name}}</span>
+              <div style="position: relative; flex: 1; background-image: repeating-linear-gradient(to right, #EEF0F3 0 1px, transparent 1px 10%)">
+                <sc-for list="{{ln.blocks}}" as="b" hint-placeholder-count="2">
+                  <span title="{{b.title}}" style="position: absolute; top: 5px; bottom: 5px; left: {{b.left}}%; width: {{b.width}}%; border-radius: 7px; background: {{b.bg}}; color: {{b.fg}}; border: 1.5px solid {{b.bd}}; opacity: {{b.op}}; font-size: 11px; font-weight: 700; padding: 0 6px; display: flex; align-items: center; white-space: nowrap; overflow: hidden">{{b.label}}</span>
+                </sc-for>
+                <span aria-hidden="true" style="position: absolute; top: -2px; bottom: -2px; left: 37%; width: 2px; background: #C92A3A"></span>
+              </div>
+            </div>
+          </sc-for>
+          <div style="display: flex; padding-left: 128px; gap: 16px; margin-top: 10px; font-size: 12px; color: #4A5566; flex-wrap: wrap">
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 10px; border-radius: 3px; background: #B8BEC8"></span>Terminé</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 10px; border-radius: 3px; background: #0E1726"></span>En cours</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 10px; border-radius: 3px; background: #FFFFFF; border: 1.5px solid #0E1726"></span>À venir</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 2px; height: 14px; background: #C92A3A"></span>11:42</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <section style="flex: 3 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+          <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; flex: 1 1 auto">Basket filles U17 · tableau</h2>
+          <button type="button" onClick="{{toggleValidate}}" style="height: 40px; padding: 0 14px; border-radius: 11px; border: 1.5px solid #0E1726; background: {{valBg}}; font-size: 13px; font-weight: 700; cursor: pointer">{{valLabel}}</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 14px">
+          <sc-for list="{{pools}}" as="pl" hint-placeholder-count="2">
+            <div style="border: 1px solid #E1E4EA; border-radius: 14px; overflow: hidden">
+              <div style="padding: 9px 12px; background: #F6F7F3; font-size: 13px; font-weight: 800; display: flex; justify-content: space-between"><span>{{pl.name}}</span><span style="font-weight: 600; color: #4A5566">J · V · Pts</span></div>
+              <sc-for list="{{pl.teams}}" as="tm" hint-placeholder-count="3">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-top: 1px solid #EEF0F3; font-size: 13.5px">
+                  <span style="width: 20px; font-weight: 800; color: #4A5566">{{tm.rank}}</span>
+                  <span style="flex: 1; font-weight: {{tm.w}}">{{tm.name}}</span>
+                  <sc-if value="{{tm.q}}" hint-placeholder-val="{{ false }}"><span style="height: 20px; padding: 0 7px; border-radius: 6px; background: #CFF04A; color: #0E1726; font-size: 10.5px; font-weight: 800; display: flex; align-items: center">Q</span></sc-if>
+                  <span style="width: 74px; text-align: right; font-variant-numeric: tabular-nums; color: #2B3545">{{tm.stats}}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 14px; align-items: center">
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <sc-for list="{{semis}}" as="sf" hint-placeholder-count="2">
+              <div style="border: 1.5px solid #0E1726; border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px">
+                <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.6px; color: #4A5566">{{sf.title}}</span>
+                <span style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: {{sf.wa}}; color: {{sf.ca}}">{{sf.a}}<span style="font-size: 11.5px; color: #4A5566; font-weight: 600">{{sf.sa}}</span></span>
+                <span style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: {{sf.wb}}; color: {{sf.cb}}">{{sf.b}}<span style="font-size: 11.5px; color: #4A5566; font-weight: 600">{{sf.sb}}</span></span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="border-radius: 14px; background: #0E1726; color: #FFFFFF; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.6px; color: #F2C94C">FINALE · 16:00 · BASKET 1</span>
+            <span style="font-size: 14px; font-weight: 600">Vainqueur demi-finale 1</span>
+            <span style="font-size: 14px; font-weight: 600">Vainqueur demi-finale 2</span>
+            <span style="font-size: 12px; color: rgba(255,255,255,0.72)">Trophée remis à 17:00 au podium</span>
+          </div>
+        </div>
+        <sc-if value="{{validated}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #F1F8D6; color: #3D4A0E; font-size: 13px; font-weight: 600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="m5 12 4 4 10-10" /></svg>
+            Lycée Lyautey inscrit en demi-finale 1 (14:00, Basket 1). Lyautey et Victor Hugo ont reçu leur prochain terrain.
+          </div>
+        </sc-if>
+      </section>
+
+      <div style="flex: 2 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+        <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Qualification automatique</h2>
+          <sc-for list="{{rules}}" as="ru" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 6px 0">
+              <span style="flex: 1; font-size: 13.5px; line-height: 1.4">{{ru.label}}</span>
+              <button type="button" role="switch" aria-checked="{{ru.checked}}" aria-label="{{ru.label}}" onClick="{{ru.toggle}}" style="width: 50px; height: 30px; border-radius: 999px; border: 0; background: {{ru.bg}}; position: relative; flex: none; cursor: pointer"><span style="position: absolute; top: 3px; left: {{ru.knob}}px; width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(14,23,38,0.3); transition: left .2s ease"></span></button>
+            </div>
+          </sc-for>
+        </section>
+
+        <section style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0 0 6px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px">Arbitres &amp; JO à venir</h2>
+          <sc-for list="{{assign}}" as="as" hint-placeholder-count="6">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid #EEF0F3">
+              <span style="width: 44px; flex: none; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 18px">{{as.t}}</span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+                <span style="font-size: 13.5px; font-weight: 700">{{as.what}}</span>
+                <span style="font-size: 12.5px; color: #4A5566">JO : {{as.jo}}</span>
+              </div>
+              <span style="height: 28px; padding: 0 9px; border-radius: 8px; background: {{as.bg}}; color: {{as.fg}}; font-size: 12px; font-weight: 700; display: flex; align-items: center; white-space: nowrap">{{as.arb}}</span>
+            </div>
+          </sc-for>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { disc: 'all', validated: false, rules: { classement: true, inscrire: true, prevenir: true, valider: false } };
+  }
+  renderVals() {
+    const s = this.state;
+    const COL = { basket: '#B84F0A', hand: '#2D5BD7', volley: '#7B45C9', foot: '#1E7F4C', athle: '#B4316B', podium: '#8A6500' };
+    const NOW = 11.7;
+    const h = (t) => { const [a, b] = t.split(':').map(Number); return a + b / 60; };
+    const L = [
+      ['Basket 1', 'basket', [['10:30', '11:15', 'Descartes–V. Hugo'], ['14:00', '14:45', 'Demi 1'], ['16:00', '16:50', 'Finale']]],
+      ['Basket 2', 'basket', [['09:40', '10:25', 'Lyautey–Descartes'], ['11:20', '12:05', 'Lyautey–V. Hugo'], ['14:00', '14:45', 'Demi 2']]],
+      ['Basket 3', 'basket', [['09:40', '10:20', 'Massignon–P. Valéry'], ['11:20', '12:05', 'Massignon–Regnault'], ['15:00', '15:45', 'Classement']]],
+      ['Basket 4', 'basket', [['10:30', '11:10', 'P. Valéry–Regnault'], ['14:50', '15:35', '5e place']]],
+      ['Hand 1', 'hand', [['10:00', '10:50', 'Lyautey–Descartes'], ['11:10', '12:00', 'P. Valéry–Massignon'], ['13:00', '13:50', 'Regnault–Lyautey']]],
+      ['Hand 2', 'hand', [['10:00', '10:50', 'V. Hugo–Regnault'], ['12:00', '12:50', 'Descartes–V. Hugo']]],
+      ['Volley 1', 'volley', [['09:30', '10:10', 'Lyautey–Regnault'], ['12:10', '12:50', 'Massignon–Regnault']]],
+      ['Volley 2', 'volley', [['11:10', '12:00', 'Descartes–Lyautey'], ['12:40', '13:20', 'P. Valéry–V. Hugo']]],
+      ['Volley 3', 'volley', [['10:15', '11:00', 'Massignon–P. Valéry'], ['13:20', '14:00', 'Demi volley']]],
+      ['Volley 4', 'volley', [['13:20', '14:00', 'Demi volley']]],
+      ['Football', 'foot', [['09:30', '10:30', 'Massignon–Descartes'], ['11:10', '12:10', 'Lyautey–Regnault'], ['14:30', '15:30', 'Petite finale'], ['15:45', '16:45', 'Finale']]],
+      ['Piste', 'athle', [['10:05', '10:50', '100 m G'], ['12:15', '12:30', '100 m F finale'], ['15:30', '16:15', 'Relais 4×100']]],
+      ['Lancers · sauts', 'athle', [['11:00', '12:00', 'Poids G'], ['14:30', '15:30', 'Longueur F'], ['15:40', '16:25', 'Triple G']]],
+      ['Podium', 'podium', [['12:30', '12:50', 'Médailles athlé'], ['17:00', '17:40', 'Trophées']]]
+    ];
+    const lanes = L.map(([name, d, bl]) => ({
+      name, color: COL[d],
+      blocks: bl.map(([a, b, label]) => {
+        const st = h(b) <= NOW ? 'done' : (h(a) <= NOW ? 'live' : 'next');
+        const on = s.disc === 'all' || s.disc === d || (s.disc === 'athle' && d === 'podium');
+        return {
+          left: ((h(a) - 8) * 10).toFixed(2), width: ((h(b) - h(a)) * 10).toFixed(2), label, title: name + ' · ' + a + '–' + b + ' · ' + label,
+          bg: st === 'done' ? '#B8BEC8' : (st === 'live' ? COL[d] : '#FFFFFF'), fg: st === 'next' ? '#0E1726' : '#FFFFFF',
+          bd: st === 'next' ? COL[d] : (st === 'live' ? '#0E1726' : '#B8BEC8'), op: on ? 1 : 0.25
+        };
+      })
+    }));
+    const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+    const CH = [['all', 'Toutes', null], ['basket', 'Basket', COL.basket], ['hand', 'Hand', COL.hand], ['volley', 'Volley', COL.volley], ['athle', 'Athlé', COL.athle], ['foot', 'Foot', COL.foot]];
+    const chips = CH.map(([id, label, dot]) => {
+      const on = s.disc === id;
+      return { label, hasDot: !!dot, dot: dot || '#FFFFFF', bg: on ? '#0E1726' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0E1726', bd: on ? '#0E1726' : '#E1E4EA', pressed: on ? 'true' : 'false', pick: () => this.setState({ disc: id }) };
+    });
+    const v = s.validated;
+    const pools = [
+      { name: 'Poule A', teams: v ? [
+          { rank: '1', name: 'Lycée Lyautey', stats: '2 · 2 · 4', q: true, w: 700 },
+          { rank: '2', name: 'Lycée Descartes', stats: '2 · 1 · 3', q: true, w: 700 },
+          { rank: '3', name: 'Lycée Victor Hugo', stats: '2 · 0 · 2', q: false, w: 500 }
+        ] : [
+          { rank: '1', name: 'Lycée Descartes', stats: '2 · 1 · 3', q: true, w: 700 },
+          { rank: '2', name: 'Lycée Lyautey', stats: '1 · 1 · 2', q: false, w: 500 },
+          { rank: '3', name: 'Lycée Victor Hugo', stats: '1 · 0 · 1', q: false, w: 500 }
+        ] },
+      { name: 'Poule B', teams: [
+          { rank: '1', name: 'Lycée Louis-Massignon', stats: '1 · 1 · 2', q: false, w: 500 },
+          { rank: '2', name: 'Lycée Regnault', stats: '1 · 1 · 2', q: false, w: 500 },
+          { rank: '3', name: 'Lycée Paul Valéry', stats: '2 · 0 · 2', q: false, w: 500 }
+        ] }
+    ];
+    const semi = (title, a, sa, b, sb) => ({ title, a, sa, b, sb,
+      wa: a.indexOf('Lycée') === 0 ? 700 : 500, ca: a.indexOf('Lycée') === 0 ? '#0E1726' : '#6B7585',
+      wb: b.indexOf('Lycée') === 0 ? 700 : 500, cb: b.indexOf('Lycée') === 0 ? '#0E1726' : '#6B7585' });
+    const semis = [
+      semi('DEMI-FINALE 1 · 14:00 · BASKET 1', v ? 'Lycée Lyautey' : '1er poule A', v ? 'qualifié' : 'en attente', '2e poule B', 'en attente'),
+      semi('DEMI-FINALE 2 · 14:00 · BASKET 2', '1er poule B', 'en attente', 'Lycée Descartes', 'qualifiée')
+    ];
+    const RL = [['classement', 'Mettre à jour le classement dès qu’un arbitre valide le score'], ['inscrire', 'Inscrire les qualifiés au match suivant (terrain et heure)'], ['prevenir', 'Prévenir les délégations : notification et annonce'], ['valider', 'Faire relire chaque résultat par un Ambassadeur avant publication']];
+    const rules = RL.map(([id, label]) => {
+      const on = !!s.rules[id];
+      return { label, checked: on ? 'true' : 'false', bg: on ? '#0E1726' : '#CBD2DD', knob: on ? 23 : 3,
+        toggle: () => { const r = Object.assign({}, this.state.rules); r[id] = !r[id]; this.setState({ rules: r }); } };
+    });
+    const assign = [
+      ['12:00', 'Hand 2 · Descartes – V. Hugo', 'Salma B.', 'À confirmer', 'warn'],
+      ['12:10', 'Volley 1 · Massignon – Regnault', 'Yanis C.', 'Rania F.', 'ok'],
+      ['12:15', 'Piste · 100 m F finale', 'Salma B., Maya S.', 'Kenza L. (starter)', 'ok'],
+      ['13:00', 'Hand 1 · Regnault – Lyautey', 'Rayan B.', 'Ilyas B.', 'ok'],
+      ['14:00', 'Basket 1 · Demi-finale 1', 'Youssef A.', 'À désigner', 'warn'],
+      ['14:00', 'Basket 2 · Demi-finale 2', 'Lina C., Omar K.', 'Mehdi T., Inès A.', 'ok']
+    ].map(([t, what, jo, arb, st]) => ({ t, what, jo, arb, bg: st === 'warn' ? '#FDEBDD' : '#EEF1F6', fg: st === 'warn' ? '#8A3A06' : '#0E1726' }));
+    return {
+      lanes, hours, chips, pools, semis, rules, assign, validated: v,
+      toggleValidate: () => this.setState({ validated: !this.state.validated }),
+      valLabel: v ? 'Annuler la simulation' : 'Valider Basket 2 (Lyautey 18–14)', valBg: v ? '#F1F8D6' : '#FFFFFF'
+    };
+  }
+}
+</script>
+</body>
+</html>

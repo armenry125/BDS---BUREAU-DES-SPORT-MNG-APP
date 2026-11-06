@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Invité — annonces</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+body{margin:0;background:#F3F4EF}
+*{box-sizing:border-box}
+a{color:#0E1726}a:hover{color:#2D5BD7}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #2D5BD7;outline-offset:2px}
+.no-sb{scrollbar-width:none}.no-sb::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3F4EF; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #0E1726">
+  <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 84px; overflow-y: auto">
+    <div style="padding: 50px 16px 24px; display: flex; flex-direction: column; gap: 14px">
+
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; padding: 0 4px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h1 style="margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 40px; line-height: 1">Annonces</h1>
+          <span style="font-size: 13px; color: #4A5566">{{unreadLabel}}</span>
+        </div>
+        <button type="button" onClick="{{markRead}}" style="height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid #E1E4EA; background: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">Tout marquer lu</button>
+      </div>
+
+      <div style="border-radius: 22px; background: #0E1726; color: #FFFFFF; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="width: 48px; height: 48px; border-radius: 14px; background: #F2C94C; color: #0E1726; display: flex; align-items: center; justify-content: center; flex: none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M8 6H5a2 2 0 0 0 2.5 3.5" /><path d="M16 6h3a2 2 0 0 1-2.5 3.5" /><path d="M12 13v4" /><path d="M9 20h6" /></svg>
+          </span>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+            <span style="font-size: 11px; font-weight: 700; letter-spacing: 1.4px; color: #F2C94C">PROCHAINE REMISE DE PRIX</span>
+            <span style="font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 25px; line-height: 1.05">Médailles athlétisme</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 14px; font-weight: 600">12:30 · Podium</span>
+            <span style="font-size: 13px; color: rgba(255,255,255,0.75)">Sud-ouest de la piste · dans 48 min</span>
+          </div>
+          <a href="Carte.dc.html" style="height: 44px; padding: 0 14px; border-radius: 12px; background: #CFF04A; color: #0E1726; text-decoration: none; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 7px; flex: none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
+            Y aller
+          </a>
+        </div>
+      </div>
+
+      <div class="no-sb" style="display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px; padding: 0 16px">
+        <sc-for list="{{chips}}" as="c" hint-placeholder-count="5">
+          <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="flex: none; height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-size: 13px; font-weight: 600; cursor: pointer">{{c.label}}</button>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{items}}" as="n" hint-placeholder-count="5">
+          <article style="background: #FFFFFF; border: 1px solid {{n.bd}}; border-radius: 18px; padding: 14px; display: flex; gap: 12px">
+            <span style="width: 40px; height: 40px; border-radius: 12px; background: {{n.ibg}}; color: {{n.ifg}}; display: flex; align-items: center; justify-content: center; flex: none">
+              <sc-if value="{{n.iTrophy}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M8 6H5a2 2 0 0 0 2.5 3.5" /><path d="M16 6h3a2 2 0 0 1-2.5 3.5" /><path d="M12 13v4" /><path d="M9 20h6" /></svg></sc-if>
+              <sc-if value="{{n.iFlag}}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4" /><path d="M6 4h11l-2.5 4L17 12H6" /></svg></sc-if>
+              <sc-if value="{{n.iCheck}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg></sc-if>
+              <sc-if value="{{n.iInfo}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6" /><path d="M12 7.5v.01" /></svg></sc-if>
+            </span>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+                <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.8px; color: {{n.tfg}}">{{n.typeLabel}}</span>
+                <span style="font-size: 12px; color: #4A5566">{{n.time}}</span>
+                <sc-if value="{{n.mine}}" hint-placeholder-val="{{ false }}"><span style="height: 20px; padding: 0 7px; border-radius: 6px; background: #0E1726; color: #CFF04A; font-size: 10.5px; font-weight: 800; display: flex; align-items: center">TON ÉQUIPE</span></sc-if>
+                <sc-if value="{{n.unread}}" hint-placeholder-val="{{ false }}"><span style="margin-left: auto; width: 10px; height: 10px; border-radius: 50%; background: #C92A3A; position: relative"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Nouveau</span></span></sc-if>
+              </div>
+              <h2 style="margin: 0; font-size: 15.5px; font-weight: 700; line-height: 1.3">{{n.title}}</h2>
+              <p style="margin: 0; font-size: 13.5px; line-height: 1.45; color: #2B3545">{{n.body}}</p>
+              <sc-if value="{{n.hasPlace}}" hint-placeholder-val="{{ true }}">
+                <a href="Carte.dc.html" style="margin-top: 2px; width: fit-content; min-height: 32px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #2D5BD7; text-decoration: none">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>{{n.place}}
+                </a>
+              </sc-if>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E1E4EA; border-radius: 18px; padding: 14px; display: flex; align-items: center; gap: 12px">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 14.5px; font-weight: 700">Alertes de ton équipe</span>
+          <span style="font-size: 12.5px; color: #4A5566">Qualifications, changements de terrain, appels</span>
+        </div>
+        <button type="button" role="switch" aria-checked="{{notifChecked}}" aria-label="Recevoir les alertes de ton équipe" onClick="{{toggleNotif}}" style="width: 56px; height: 34px; border-radius: 999px; border: 0; background: {{notifBg}}; position: relative; cursor: pointer; flex: none">
+          <span style="position: absolute; top: 4px; left: {{notifKnob}}px; width: 26px; height: 26px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(14,23,38,0.3); transition: left .2s ease"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Navigation invité" style="position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; height: 84px; background: #FFFFFF; border-top: 1px solid #E1E4EA; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 6px 8px 22px">
+    <a href="Parcours.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.5" /><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5" /><circle cx="18" cy="5" r="2.5" /></svg></span>
+      Parcours
+    </a>
+    <a href="Carte.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z" /><path d="M9 4v14" /><path d="M15 6v14" /></svg></span>
+      Carte
+    </a>
+    <a href="Live.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #4A5566; font-size: 11.5px; font-weight: 600">
+      <span style="width: 54px; height: 30px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4" /></svg></span>
+      Live
+    </a>
+    <a href="Annonces.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #0E1726; font-size: 11.5px; font-weight: 700">
+      <span style="position: relative; width: 54px; height: 30px; border-radius: 999px; background: #CFF04A; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" /><path d="M15 9a4 4 0 0 1 0 6" /><path d="M18 6a8 8 0 0 1 0 12" /></svg></span>
+      Annonces
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { type: 'all', read: false, notif: true };
+  }
+  renderVals() {
+    const s = this.state;
+    const T = {
+      prix: ['REMISE DE PRIX', '#8A6500', '#FBF3D9', '#6B4E00'],
+      depart: ['DÉPART', '#B4316B', '#FBE7F0', '#8E1F52'],
+      qualif: ['QUALIFICATION', '#CFF04A', '#CFF04A', '#3D4A0E'],
+      info: ['INFO', '#2D5BD7', '#E7EDFD', '#1F46B0']
+    };
+    const RAW = [
+      ['depart', '11:40', '100 m filles : finale à 12:15', "Appel des athlètes à 12:00 en chambre d'appel, tente sud à l'intérieur de la piste.", 'Départ, ligne droite nord', true, false],
+      ['qualif', '11:16', 'Lycée Descartes en demi-finale', 'Demi-finale 2 à 14:00 sur Basket 2. Rendez-vous 13:45 au point d’appel, devant le terrain.', 'Basket 2', true, true],
+      ['info', '11:05', 'Hand 2 : début décalé à 12:00', 'Le match Descartes – Victor Hugo commence 15 minutes plus tard que prévu.', 'Hand 2', false, false],
+      ['prix', '10:50', 'Médailles athlétisme à 12:30', 'Au podium, sud-ouest de la piste. Médaillés : présentez-vous à 12:20 avec votre dossard.', 'Podium', false, false],
+      ['depart', '10:05', '100 m garçons : départ dans 10 min', 'Séries de 6 athlètes, ligne droite nord.', '', false, false],
+      ['info', '09:00', 'Bienvenue à Beaulieu !', "Eau et collations à la buvette, à l'intérieur de la piste côté est. Clés des vestiaires à l'accueil.", 'Buvette', false, false]
+    ];
+    const items = RAW.filter((r) => s.type === 'all' || r[0] === s.type).map(([t, time, title, body, place, unread, mine]) => {
+      const [label, ibg, , tfg] = T[t];
+      const isUnread = unread && !s.read;
+      return {
+        typeLabel: label, time, title, body, place, hasPlace: !!place, unread: isUnread, mine,
+        ibg: t === 'qualif' ? '#CFF04A' : T[t][2], ifg: t === 'qualif' ? '#0E1726' : ibg, tfg,
+        bd: isUnread ? '#0E1726' : '#E1E4EA',
+        iTrophy: t === 'prix', iFlag: t === 'depart', iCheck: t === 'qualif', iInfo: t === 'info'
+      };
+    });
+    const CH = [['all', 'Toutes'], ['prix', 'Remises de prix'], ['depart', 'Départs'], ['qualif', 'Qualifications'], ['info', 'Infos']];
+    const chips = CH.map(([id, label]) => {
+      const on = s.type === id;
+      return { label, bg: on ? '#0E1726' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0E1726', bd: on ? '#0E1726' : '#E1E4EA', pressed: on ? 'true' : 'false', pick: () => this.setState({ type: id }) };
+    });
+    return {
+      items, chips,
+      unreadLabel: s.read ? 'Tout est lu' : '2 nouvelles depuis ta dernière visite',
+      markRead: () => this.setState({ read: true }),
+      notifChecked: s.notif ? 'true' : 'false', notifBg: s.notif ? '#0E1726' : '#CBD2DD', notifKnob: s.notif ? 26 : 4,
+      toggleNotif: () => this.setState({ notif: !this.state.notif })
+    };
+  }
+}
+</script>
+</body>
+</html>
